@@ -612,50 +612,6 @@ export const tableData = [
   },
 ];
 
-export const columns = [
-  {
-    field: "image",
-    header: "Image",
-  },
-  {
-    field: "title",
-    header: "Title",
-  },
-  {
-    field: "price",
-    header: "Price",
-  },
-  {
-    field: "orders",
-    header: "Sales",
-  },
-  {
-    field: "actions",
-    header: "Actions",
-  },
-];
-export const ordersColumns = [
-  // {
-  //   field: "image",
-  //   header: "Image",
-  // },
-  {
-    field: "title",
-    header: "Title",
-  },
-  {
-    field: "price",
-    header: "Price",
-  },
-  {
-    field:"Contact",
-    header: "Contact",
-  },
-  {
-    field: "actions",
-    header: "Status",
-  },
-];
 export const messageColumns = [
   {
     field: "buyer",
@@ -690,21 +646,44 @@ export const buttons = [
   },
 ];
 
-export const options = [
+export const columns = [
   {
-    value: "design",
-    text: "Design",
+    field: "image",
+    header: "Image",
   },
   {
-    value: "web",
-    text: "Web Development",
+    field: "title",
+    header: "Title",
   },
   {
-    value: "animation",
-    text: "Animation",
+    field: "price",
+    header: "Price",
+  },
+
+  {
+    field: "actions",
+    header: "Delete",
+  },
+];
+export const ordersColumns = [
+  // {
+  //   field: "image",
+  //   header: "Image",
+  // },
+  {
+    field: "title",
+    header: "Title",
   },
   {
-    value: "music",
-    text: "Music",
+    field: "price",
+    header: "Price",
+  },
+  {
+    field:"Contact",
+    header: "Contact",
+  },
+  {
+    field: "actions",
+    header: "Status",
   },
 ];

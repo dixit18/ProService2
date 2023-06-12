@@ -1,20 +1,19 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { AiOutlineClockCircle } from "react-icons/ai";
+
 import { BsCheckLg } from "react-icons/bs";
-import { TfiReload } from "react-icons/tfi";
+
 import { Link, useParams,useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { toast } from "react-toastify";
+
 import { Axios } from "../../../config";
 import requests from "../../../libs/request";
 
 const ServiceOrder = ({ data, id }) => {
-  console.log(id)
+  console.log(id,"from upper")
   const {id:paramId} = useParams();
   console.log(paramId,"oatd")
   const nevigate = useNavigate()
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 const handleBooking = async (e)=>{
   e.preventDefault()
 const response = await Axios.post(`${requests.orders}/${id}`)

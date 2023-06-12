@@ -12,6 +12,7 @@ const stripePromise = loadStripe(
 console.log("inside pay form")
 const Pay = () => {
   const { id } = useParams();
+  console.log(id ,"from _id")
   const [clientSecret, setClientSecret] = useState("");
   useEffect(() => {
     const makeRequest = async () => {
@@ -36,7 +37,7 @@ const Pay = () => {
   };
 
   return (
-    <div className="py-40 pb-10">
+    <div className="py-48 pb-40">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />

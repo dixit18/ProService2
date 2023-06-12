@@ -26,7 +26,7 @@ const Success = () => {
   }, []);
   //kone karyudharmik nosanje aavvanu ktla vage ha aavvvanu j n 9ok samoosa ? kon?dharmik proof?maratharashtr upar thi koy ny javanu?ny okk ky thay to kvoyyy bobl atyare nasto padyo che kay na kale to pg a gyo atle chevdo b ny lavyook kythay atle kvhu aaj kay noto lavyo bav bhukh lahilagi break lay lidho k teha to niche vayu javay n khoba kadach tikha daliya padya hse e ny khadha meoy ne ke shu dalya che ke nay em ha 90% to che ok 2-3 days pela nakhela but khadha to nthi kadaxch jota hoy to kha jota che  ha to ht jay atle aav nhito cha piva aavok
   return (
-    <div className="py-40 pb-10">
+    <div className="py-60 pb-68">
       <div className="contain">
         <div className="flex w-full items-center justify-center flex-col">
           <div className="border border-primary max-w-[400px] rounded p-4 flex items-center justify-center flex-col gap-4">

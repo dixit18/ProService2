@@ -1,5 +1,5 @@
 const express = require("express");
-const userController = require("../controller/userController");
+const {signupUser,loginUser,logoutUser,getAccountDetails,deleteProfile,forgotPassword,resetPassword,getUser} = require("../controller/userController");
 const isAuthenticated  = require("../middleware/validate")
 
 const router = express.Router();
@@ -7,19 +7,19 @@ const router = express.Router();
 
 
 
-router.route("/signup").post(userController.signupUser);
-router.route('/login').post(userController.loginUser)
-router.route('/logout').get(userController.logoutUser)
+router.route("/signup").post(signupUser);
+router.route('/login').post(loginUser)
+router.route('/logout').get(logoutUser)
 router.route("/me")
-    .get(isAuthenticated, userController.getAccountDetails)
-    .delete(isAuthenticated, userController.deleteProfile);
+    .get(isAuthenticated, getAccountDetails)
+    .delete(isAuthenticated, deleteProfile);
 
-router.route('/forgotpassword').get(userController.forgotPassword)
-router.route('/resetpassword/:token').patch(userController.resetPassword)
+router.route('/forgotpassword').get(forgotPassword)
+router.route('/resetpassword/:token').patch(resetPassword)
 
 
 
-router.get("/:id",userController.getUser);
+router.get("/:id",getUser);
 
 
 module.exports = router;

@@ -1,19 +1,18 @@
 const isAuthenticated = require("../middleware/validate");
 
 const express = require("express");
-const serviceController = require("../controller/serviceController");
+const {createService,getService,deleteService,getServices} = require("../controller/serviceController");
 
 const router = express.Router();
 
 router
   .route("/")
-  .post(isAuthenticated, serviceController.createService)
-  .get(serviceController.getServices);
+  .post(isAuthenticated, createService)
+  .get(getServices);
 router
   .route("/single/:id")
-  .delete(isAuthenticated, serviceController.deleteService)
-  .get(serviceController.getService);
+  .delete(isAuthenticated, deleteService)
+  .get(getService);
 
-// router.get("/getone/:id", serviceController.getService);
 
 module.exports = router;

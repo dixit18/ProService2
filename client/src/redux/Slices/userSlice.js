@@ -5,7 +5,7 @@ import requests from "../../libs/request";
 export const loginAsync = createAsyncThunk(
   "auth/login",
   async ({ email, password }) => {
-    // Make an API request to log in the user and obtain the token
+    
     console.log(email, password);
     const response = await Axios.post(`${requests.login}`, {
       email,
@@ -15,15 +15,13 @@ export const loginAsync = createAsyncThunk(
     console.log('----------------------------------------->',response.data.user)
 
     return response.data.user;
-    // if (!response.ok) {
-    //   throw new Error("Login failed");
-    // }
+  
   }
 );
 
-// Create the logout async thunk
+
 export const logoutAsync = createAsyncThunk("auth/logout", async () => {
-  // Make an API request to log out the user
+  
   const response = await Axios.get(`${requests.logout}`);
 
   console.log(response,"fhdfdhiu");
@@ -47,12 +45,12 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loginAsync.pending, (state) => {
-        // Update the state to indicate that login is in progress
+        
         state.loading = true;
         state.error = null;
       })
       .addCase(loginAsync.fulfilled, (state, action) => {
-        // Update the state with the user data received from the API
+// Update the state with the user data received from the API
         state.loading = false;
         state.address = action.payload.address;
         state.avatar = action.payload.avatar;

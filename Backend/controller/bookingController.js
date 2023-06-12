@@ -3,6 +3,8 @@ const ErrorHandler = require("../utils/errorHandler");
 const BookingModel = require("../models/bookingModel");
 const ServiceModel = require("../models/serviceModel");
 const Stripe = require("stripe")
+
+
 const createBooking = catchAsync(async (req, res, next) => {
   const service = await ServiceModel.findById(req.params.id);
 
@@ -13,7 +15,6 @@ const createBooking = catchAsync(async (req, res, next) => {
      iserviceProviderId: service.userId,
     buyerId: req.user._id,
     price: service.price,
-    // payment: paymentIntent.id,
     isCompleted: true
   });
 
@@ -26,36 +27,21 @@ const createBooking = catchAsync(async (req, res, next) => {
 
 
 
-// const getBooking = catchAsync(async (req, res, next) => {
-//     const booking = await BookingModel.find({
-//         ...(req.isServiceProvider?{ iserviceProviderId:req.user._id}:{buyerId:req.user._id}),
-//         isCompleted:true
-
-//     })
-
-//     console.log(booking,"hello there")
-//     res.status(200).json({
-//         booking
-//     })
-// })
-
 const getBooking = catchAsync(async (req, res, next) => {
   const page = parseInt(req.query.page) || 1; // Current page number
-  const limit = 5; // Number of documents per page
+  const limit = 9; // Number of documents per page
 
   const skip = (page - 1) * limit; // Number of documents to skip
 
-  const totalDocuments = await BookingModel.countDocuments({
+  const query = {
     ...(req.isServiceProvider ? { iserviceProviderId: req.user._id } : { buyerId: req.user._id }),
-    isCompleted: true
-  });
+  };
+
+  const totalDocuments = await BookingModel.countDocuments(query);
 
   const totalPages = Math.ceil(totalDocuments / limit); // Total number of pages
 
-  const booking = await BookingModel.find({
-    ...(req.isServiceProvider ? { iserviceProviderId: req.user._id } : { buyerId: req.user._id }),
-    isCompleted: true
-  })
+  const booking = await BookingModel.find(query)
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit);
@@ -63,20 +49,15 @@ const getBooking = catchAsync(async (req, res, next) => {
   res.json({
     currentPage: page,
     totalPages,
-    data: booking
+    data: booking,
   });
-
 });
 
-
-// Update order status
 const updateBooking = catchAsync (async(req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 console.log(status)
-    // Perform any necessary validation or authorization checks
 
-    // Update the order status
     const updatedOrder = await BookingModel.findByIdAndUpdate(
 id    ,  { status },
       { new: true }
@@ -90,56 +71,57 @@ id    ,  { status },
 });
 
 
-const createPaymentIntent = async(req,res,next)=>{
+const createPaymentIntent =catchAsync( async(req,res,next)=>{
+  const {id}= req.params
 const stripe = new Stripe(process.env.STRIPE)
-const service = await ServiceModel.findById(req.params.id);
+const booked = await BookingModel.findById(id);
+
+console.log(booked,"service")
 
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: Math.round(service.price *100),
+    amount: Math.round(booked.price *100),
     currency: "inr",
     automatic_payment_methods: {
       enabled: true,
     },
   });
 
-  const newBooking = new BookingModel({
-    serviceId: service._id,
-    img: service.img,
-    title: service.title,
-     iserviceProviderId: service.userId,
-    buyerId: req.user._id,
-    price: service.price,
-    payment: paymentIntent.id,
-  });
-  
-// const id = req.params.id
-//   // await newBooking.save();
-//   const newBooking = await BookingModel.findOneAndUpdate(
-//     { _id:id}, 
-//     { new: true } 
-//   );
+  const BookingPayment = await BookingModel.findOneAndUpdate({
+    _id: id,
+  },
+  {
+    $set: {
+      payment: paymentIntent.id,
+      status:"completed"
+    },
+  }, {
+    new: true
+  }
+  );
   
   res.status(200).send({
     clientSecret: paymentIntent.client_secret,
   });
-}
-const confirm = async(req,res,next)=>{
-  console.log("req",req.body)
-  const orders = await BookingModel.findOneAndUpdate(
+})
+const confirm = catchAsync(async(req,res,next)=>{
+
+  
+  
+  const booking = await BookingModel.findOneAndUpdate(
     {
       payment: req.body.payment_intent,
     },
     {
       $set: {
-        isCompleted: true,
+        status: "completed",
       },
     }, {
       new: true
     }
   );
-console.log(orders);
+console.log(booking,"from order");
   res.status(200).json("Order has been confirmed.");
-}
+})
 module.exports = {
   createBooking,
   getBooking,createPaymentIntent,confirm,

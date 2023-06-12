@@ -34,11 +34,13 @@ const ServiceSchema = new mongoose.Schema(
     },
     cover: {
       type: String,
-      // required: true,
+      required: true,
+      default:"https://flowbite.com/docs/images/carousel/carousel-1.svg"
     },
     images: {
       type: [String],
       required: false,
+      default:"https://flowbite.com/docs/images/carousel/carousel-1.svg"
     },
     shortTitle: {
       type: String,

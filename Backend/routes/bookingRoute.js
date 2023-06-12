@@ -1,15 +1,15 @@
 const express = require("express");
 const isAuthenticated = require("../middleware/validate");
-const bookingController = require("../controller/bookingController");
+const {getBooking,confirm,createPaymentIntent,createBooking,updateBooking} = require("../controller/bookingController");
 
 const router = express.Router();
-router.route("/").get(isAuthenticated, bookingController.getBooking).put(isAuthenticated,bookingController.confirm);
+router.route("/").get(isAuthenticated, getBooking).put(isAuthenticated,confirm);
 router
   .route("/create-payment-intent/:id")
-  .post(isAuthenticated, bookingController.createPaymentIntent)
+  .post(isAuthenticated, createPaymentIntent)
  ;
-// router.route("/:id").post(isAuthenticated, bookingController.createBooking);
-router.route("/:id").post(isAuthenticated,bookingController.createBooking)
-router.route("/:id").patch(bookingController.updateBooking)
+
+router.route("/:id").post(isAuthenticated,createBooking)
+router.route("/:id").patch(updateBooking)
 
 module.exports = router;

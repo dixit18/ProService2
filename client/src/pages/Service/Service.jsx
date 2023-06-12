@@ -18,7 +18,7 @@ const Service = () => {
   });
   
   const userId = data?.userId;
-
+console.log(id,"from service")
   return (
     <main className="py-40 pb-10">
       <div className="contain">

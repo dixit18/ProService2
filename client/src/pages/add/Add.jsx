@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BsUpload } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { Axios } from "../../config";
-import { options } from "../../data/data";
+import { options } from "../../libs/data";
 import requests from "../../libs/request";
 import upload from "../../libs/upload";
 import { gigReducer, INITIAL_STATE } from "../../reducers/addGigReducer";
@@ -45,9 +45,9 @@ const Add = () => {
       queryClient.invalidateQueries(["myservices"]);
     },
     onError: (error) => {
-      // store.setRequestLoading(false);
+
       console.log(error);
-      toast.error("Something went wrong", {
+      toast.error("Something went wrong try again", {
         position: "top-right",
         toastId: 1,
       });
@@ -100,14 +100,9 @@ const Add = () => {
                   placeholder="e.g I will do something I'm really good at..."
                   className={`border w-full h-10 px-3 rounded-md outline-none text-sm border-gray-300 focus:border-primary`}
                   onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.title}
+                 
                 />
-                {/* {errors.title && (
-                  <p className="text-sm font-medium text-red-500 text-end w-full">
-                    {errors.title}
-                  </p>
-                )} */}
+               
               </div>
               <div className="flex flex-col w-full gap-1 items-start justify-start">
                 <label
@@ -120,8 +115,7 @@ const Add = () => {
                   name="category"
                   id="category"
                   onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.cat}
+                  
                   className={`border w-full h-10 px-3 rounded-md outline-none text-sm appearance-none bg-[url(./assets/icons/dropDown.svg)] bg-no-repeat bg-[center_right_1.2rem] cursor-pointer border-gray-300 focus:border-primary`}
                 >
                   {options.map((item, i) => (
@@ -130,11 +124,7 @@ const Add = () => {
                     </option>
                   ))}
                 </select>
-                {/* {errors.cat && (
-                  <p className="text-sm font-medium text-red-500 text-end w-full">
-                    {errors.cat}
-                  </p>
-                )} */}
+               
               </div>
               <div className="flex flex-col w-full gap-1 items-start justify-start">
                 <label
@@ -251,14 +241,9 @@ const Add = () => {
                   placeholder="Brief description to customers of your service..."
                   className={`w-full border h-[136px] rounded-md text-sm text-gray-600 outline-none resize-none border-gray-300 p-3 focus:border-primary`}
                   onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.desc}
+                  
                 ></textarea>
-                {/* {errors.desc && (
-                  <p className="text-sm font-medium text-red-500 text-end w-full">
-                    {errors.desc}
-                  </p>
-                )} */}
+               
               </div>
               <button
                 type="submit"
@@ -280,23 +265,18 @@ const Add = () => {
                   htmlFor="shortTitle"
                   className="text-sm font-medium text-darkColor/80"
                 >
-                  Service Title
+                  Short Title
                 </label>
                 <input
                   type="text"
                   name="shortTitle"
                   id="shortTitle"
                   onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.shortTitle}
+                 
                   placeholder="e.g One page web design..."
                   className={`border w-full h-10 px-3 rounded-md outline-none text-sm border-gray-300 focus:border-primary`}
                 />
-                {/* {errors.shortTitle && (
-                  <p className="text-sm font-medium text-red-500 text-end w-full">
-                    {errors.shortTitle}
-                  </p>
-                )} */}
+             
               </div>
               <div className="flex flex-col w-full gap-1 items-start justify-start">
                 <label
@@ -309,63 +289,15 @@ const Add = () => {
                   name="shortDesc"
                   id="shortDesc"
                   onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.shortDesc}
                   cols="30"
                   rows="10"
                   placeholder="Short Description of your service..."
                   className={`w-full border h-[136px] rounded-md text-sm text-gray-600 outline-none resize-none border-gray-300 p-3 focus:border-primary`}
                 ></textarea>
-                {/* {errors.shortDesc && (
-                  <p className="text-sm font-medium text-red-500 text-end w-full">
-                    {errors.shortDesc}
-                  </p>
-                )} */}
+               
               </div>
-              <div className="flex flex-col w-full gap-1 items-start justify-start">
-                <label
-                  htmlFor="deliveryTime"
-                  className="text-sm font-medium text-darkColor/80"
-                >
-                  Delivery Time (e.g 3 days)
-                </label>
-                <input
-                  type="text"
-                  name="deliveryTime"
-                  onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.deliveryTime}
-                  id="deliveryTime"
-                  className={`border w-full h-10 px-3 rounded-md outline-none text-sm border-gray-300 focus:border-primary`}
-                />
-                {/* {errors.deliveryTime && (
-                  <p className="text-sm font-medium text-red-500 text-end w-full">
-                    {errors.deliveryTime}
-                  </p>
-                )} */}
-              </div>
-              <div className="flex flex-col w-full gap-1 items-start justify-start">
-                <label
-                  htmlFor="revisionNumber"
-                  className="text-sm font-medium text-darkColor/80"
-                >
-                  Revision Number
-                </label>
-                <input
-                  type="text"
-                  name="revisionNumber"
-                  onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.revisionNumber}
-                  id="revisionNumber"
-                  className={`border w-full h-10 px-3 rounded-md outline-none text-sm border-gray-300 focus:border-primary `}
-                />
-                {/* {errors.revisionNumber && (
-                  <p className="text-sm font-medium text-red-500 text-end w-full">
-                    {errors.revisionNumber}
-                  </p>
-                )} */}
-              </div>
+             
+            
               <div className="flex flex-col w-full gap-1 items-start justify-start">
                 <label
                   htmlFor="features"
@@ -423,15 +355,10 @@ const Add = () => {
                   name="price"
                   id="price"
                   onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.price}
+                
                   className={`border w-full h-10 px-3 rounded-md outline-none text-sm border-gray-300 focus:border-primary`}
                 />
-                {/* {errors.price && (
-                  <p className="text-sm font-medium text-red-500 text-end w-full">
-                    {errors.price}
-                  </p>
-                )} */}
+           
               </div>
             </div>
             <button

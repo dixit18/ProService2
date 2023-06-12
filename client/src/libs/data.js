@@ -77,3 +77,46 @@ export const featureData = [
     },
   ];
   
+  export const options = [
+    {
+      value: "Salon for Women",
+      text: "Salon for Women",
+    },
+    {
+      value: "Hair services for Women",
+      text: "Hair services for Women",
+    },
+    {
+      value:"Women's Therapies",
+      text: "Women's Therapies",
+    },
+    {
+      value: "Salon for Men",
+      text: "Salon for Men",
+    },
+    {
+      value: "Men's Therapies",
+      text: "Men's Therapies",
+    },
+    {
+      value: "AC/Appliance Repair",
+      text: "AC/Appliance Repair",
+    },
+    {
+      value: "Plumbers & Carpenters",
+      text: "Plumbers & Carpenters",
+    },
+    {
+      value: "Cleaning & Pest Control",
+      text: "Cleaning & Pest Control",
+    },
+    {
+      value: "Electricians",
+      text: "Electricians",
+    },
+    
+
+
+  ];
+
+

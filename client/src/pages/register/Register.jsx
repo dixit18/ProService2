@@ -37,6 +37,7 @@ function Register({ setShowModal }) {
   };
 
   const handleServiceProvider = (e) => {
+    console.log(e.target.checked,"is checked")
     setUser((prev) => {
       return { ...prev, isServiceProvider: e.target.checked };
     });

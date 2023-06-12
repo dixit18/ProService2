@@ -1,169 +1,164 @@
-import {useEffect, useState} from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
+import { useEffect, useState } from "react";
 import { MdMail } from "react-icons/md";
 import { ordersColumns } from "../../data/data";
 import { useQuery } from "@tanstack/react-query";
 import { Axios } from "../../config";
 import requests from "../../libs/request";
-import useAuthStore from "../../stores";
+import EditIcon from "@mui/icons-material/Edit";
 import loader from "../../assets/icons/loader.svg";
-import { useNavigate } from "react-router-dom";
-import { Button } from '@mui/material';
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import DeleteIcon from '@mui/icons-material/Delete';
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Pagination from "../../utils/Pagination/Pagination";
 
-  // const queryClient = useQueryClient(); // Query client instance
+
 const Orders = () => {
-  // const { authUser } = useAuthStore();
   const [currentPage, setCurrentPage] = useState(1);
-  const [isClicked,setIsClicked] = useState("")
-  const user = useSelector((state)=>state.auth)
+  const [isClicked, setIsClicked] = useState("");
+  const user = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  const { isLoading, error, data,refetch } = useQuery({
-  queryKey: ["orders", currentPage],
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ["orders", currentPage],
 
-    queryFn: () => Axios.get(`${requests.orders}?page=${currentPage}`).then((res) => res.data),
+    queryFn: () =>
+      Axios.get(`${requests.orders}?page=${currentPage}`).then(
+        (res) => res.data
+      ),
   });
 
-
- const handlePageChange = (pageNumber) => {
+  const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-
-
-
-const handleAcceptServiceForProvider = async (acceptId)=>{
-  try{
-    const response = await Axios.patch(`${requests.orders}/${acceptId}`,{
-      status:"accepted"
-    })
-    console.log(response,"responser form order ")
-  }catch(err){
-    console.log(err)
-  }
-
-setIsClicked((prev)=>!prev)
-}
-
-const handleRejectServiceForProvider = async (deleteid)=>{
-  try{
-    const response = await Axios.patch(`${requests.orders}/${deleteid}`,{
-      status:"rejected"
-    })
-    console.log(response,"responser form delete")
-  }catch(err){
-    console.log(err)
-  }
-setIsClicked((prev)=>!prev)
-}
-console.log(data?.data,"kem cho majama")
-useEffect(()=>{
-refetch()
-},[isClicked])
-
-
-//   const tableActions = data?.map((item) => ({
-  
-//     title: (
-//       <p className="w-full flex items-center justify-start">{item.title}</p>
-//     ),
-//     price: (
-//       <p className="w-full flex items-center justify-start">{item.price}</p>
-//     ),
-//   Contact:(
-// <p className="w-full flex items-center justify-start">{item.price}</p>
-//   ),
-//     actions: (
-      // <div
-      //   className="w-8 h-8 cursor-pointer bg-blue-600 rounded-full flex items-center justify-center text-white"
-      //   // onClick={() => handleContact(item)
-      //   // }
-      // >
-      //   <MdMail size={18} />
-      // </div>
-//     ),
-//   }));
-{/*
-
- */}
-
- const Box =({color, text})=>{
-return(
-  <div style={{border:"2px solid black", borderRadius:"8px", backgroundColor:`${color}`, width:"80px", height:"30px", paddingTop:"4px"}}>
-    <h6>{text}</h6>
-  </div>
-)
- }
-
- const tableActions = data?.data?.map((item) => {
-  let actionButton;
-
-  if (!user.isServiceProvider) {
-    if (item.status === "pending") {
-      actionButton = <Box color={"#34ebd2"} text={"pending"}></Box>;
-    } else if (item.status === "accepted") {
-      actionButton = (
-        
-        <Box color={"green"} text={"Accepted"}></Box>
-      );
-    } else if (item.status === "completed") {
-      actionButton = (<Box color={"#8e2ffa"} text={"Completed"}></Box>
-      );
-    } else {
-      actionButton = (
-        <Box color={"red"} text={"Rejected"}></Box>
-      );
+  const handleAcceptServiceForProvider = async (acceptId) => {
+    try {
+      const response = await Axios.patch(`${requests.orders}/${acceptId}`, {
+        status: "accepted",
+      });
+      console.log(response, "responser form order ");
+    } catch (err) {
+      console.log(err);
     }
-  } else {
-    actionButton = (
-      <div style={{ display: "flex", flexDirection: "row",gap:4 }}>
-        <Button variant="contained" color="success" onClick={()=>handleAcceptServiceForProvider(item._id)}
-   disabled={item.status === "accepted" || item.status === "rejected"}
-        >
-          <CheckCircleIcon />
-        </Button>
-        <Button variant="contained" color="error" onClick={()=>handleRejectServiceForProvider(item._id)}
-         disabled={item.status === "accepted" || item.status === "rejected"}
-        >
-          <DeleteIcon />
-        </Button>
+
+    setIsClicked((prev) => !prev);
+  };
+
+  const handleRejectServiceForProvider = async (deleteid) => {
+    try {
+      const response = await Axios.patch(`${requests.orders}/${deleteid}`, {
+        status: "rejected",
+      });
+      console.log(response, "responser form delete");
+    } catch (err) {
+      console.log(err);
+    }
+    setIsClicked((prev) => !prev);
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [isClicked]);
+
+  const Box = ({ color, text }) => {
+    return (
+      <div
+        style={{
+          border: "2px solid black",
+          borderRadius: "8px",
+          backgroundColor: `${color}`,
+          width: "80px",
+          height: "30px",
+          paddingTop: "4px",
+        }}
+      >
+        <h6>{text}</h6>
       </div>
     );
-  }
-
- //Kone connect kryo che?  are udit nu che upar valu khali chalu jaldi k mare functionality implement karavani che
-  return {
-    title: (
-      <p className={`w-full flex items-center justify-start `}   style={{
-    textDecoration:
-      item.status === "accepted" || item.status === "rejected"
-        ? "line-through"
-        : "none",
-  }}>{item.title}</p>
-    ),
-    price: (
-      <p className="w-full flex items-center justify-start">{item.price}</p>
-    ),
-    Contact: (
-      <div
-        className="w-8 h-8 cursor-pointer bg-blue-600 rounded-full flex items-center justify-center text-white"
-      >
-        <MdMail size={18} />
-      </div>
-    ),
-    actions: <div>{actionButton}</div>,
   };
-});
+
+  const tableActions = data?.data?.map((item) => {
+    const isStatusCompleted = item.status === "completed";
+    let actionButton;
+    console.log("item ", item);
+    if (!user.isServiceProvider) {
+      if (item.status === "pending") {
+        actionButton = <Box color={"#34ebd2"} text={"pending"}></Box>;
+      } else if (item.status === "accepted") {
+        actionButton = (
+          <Link to={`/pay/${item._id}`}>
+            <Box color={"#ADD8E6"} text={"Pay"}></Box>
+          </Link>
+        );
+      } else if (item.status === "completed") {
+        actionButton = <Box color={"#8e2ffa"} text={"Completed"}></Box>;
+      } else {
+        actionButton = <Box color={"red"} text={"Rejected"}></Box>;
+      }
+    } else {
+      actionButton = (
+        <div style={{ display: "flex", flexDirection: "row", gap: 4 }}>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => handleAcceptServiceForProvider(item._id)}
+            disabled={item.status !== "pending"}
+          >
+            <CheckCircleIcon />
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => handleRejectServiceForProvider(item._id)}
+            disabled={item.status !== "pending"}
+          >
+            <DeleteIcon />
+          </Button>
+
+        </div>
+      );
+    }
+
+    return {
+      title: (
+        <p
+          className={`w-full flex items-center justify-start `}
+          style={{
+            textDecoration:
+              item.status !== "pending" 
+                ? "line-through"
+                : "none",
+          }}
+        >
+          {item.title}
+        </p>
+      ),
+      price: (
+        <p className="w-full flex items-center justify-start">{item.price}</p>
+      ),
+      Contact: (
+        <div
+          className={`w-8 h-8 cursor-pointer bg-blue-600 rounded-full flex items-center justify-center text-white ${
+            !isStatusCompleted ? "opacity-50 pointer-events-none" : ""
+          }`}
+        >
+          <MdMail size={18} />
+        </div>
+      ),
+      actions: <div>{actionButton}</div>,
+    };
+  });
 
   return (
     <main className="pt-40 pb-10">
       <div className="contain">
         <div className="w-full flex flex-col items-start gap-5 justify-start">
           <div className="flex items-center justify-between w-full gap-2">
-            <h2 className="text-2xl font-bold">Orders</h2>
+            {<h2 className="text-2xl font-bold">{`${user.isServiceProvider?"Appoinments":"Bookings"}`}</h2>}
           </div>
           {isLoading ? (
             <div className="flex items-center justify-center w-full">
@@ -223,7 +218,7 @@ return(
               )}
             </>
           )}
-             {data?.totalPages > 1 && (
+          {data?.totalPages > 1 && (
             <div style={{ width: "100%" }}>
               <Pagination
                 totalPages={data.totalPages}
