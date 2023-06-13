@@ -2,11 +2,11 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from "react";
 import { MdMail } from "react-icons/md";
+import {AiFillEnvironment} from  "react-icons/ai";
 import { ordersColumns } from "../../data/data";
 import { useQuery } from "@tanstack/react-query";
 import { Axios } from "../../config";
 import requests from "../../libs/request";
-import EditIcon from "@mui/icons-material/Edit";
 import loader from "../../assets/icons/loader.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
@@ -20,6 +20,7 @@ const Orders = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isClicked, setIsClicked] = useState("");
   const user = useSelector((state) => state.auth);
+  console.log(user.address,"user address")
   const navigate = useNavigate();
 
   const { isLoading, error, data, refetch } = useQuery({
@@ -82,7 +83,11 @@ const Orders = () => {
   };
 
   const tableActions = data?.data?.map((item) => {
+
     const isStatusCompleted = item.status === "completed";
+  const isRejected = item.status === "rejected";
+const urlFormap = user.isServiceProvider?item.buyerId:item.iserviceProviderId;
+
     let actionButton;
     console.log("item ", item);
     if (!user.isServiceProvider) {
@@ -126,16 +131,15 @@ const Orders = () => {
     return {
       title: (
         <p
-          className={`w-full flex items-center justify-start `}
-          style={{
-            textDecoration:
-              item.status !== "pending" 
-                ? "line-through"
-                : "none",
-          }}
-        >
-          {item.title}
-        </p>
+        className={`w-full flex items-center justify-start ${
+          isRejected ? "line-through" : ""
+        }`}
+        style={{
+          color: isRejected ? "red" : isStatusCompleted ? "green" : "",
+        }}
+      >
+        {item.title}
+      </p>
       ),
       price: (
         <p className="w-full flex items-center justify-start">{item.price}</p>
@@ -150,6 +154,17 @@ const Orders = () => {
         </div>
       ),
       actions: <div>{actionButton}</div>,
+      map: (
+        <Link to={`/map/${urlFormap}`}
+          className={`w-8 h-8 cursor-pointer bg-blue-600 rounded-full flex items-center justify-center text-white 
+          ${
+            !isStatusCompleted ? "opacity-50 pointer-events-none" : ""
+          }`}
+        >
+         
+         <AiFillEnvironment/>
+        </Link>
+      )
     };
   });
 

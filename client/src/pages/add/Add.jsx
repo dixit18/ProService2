@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BsUpload } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { Axios } from "../../config";
-import { options } from "../../libs/data";
+import { options,gujaratCities } from "../../libs/data";
 import requests from "../../libs/request";
 import upload from "../../libs/upload";
 import { gigReducer, INITIAL_STATE } from "../../reducers/addGigReducer";
@@ -97,7 +97,7 @@ const Add = () => {
                   type="text"
                   name="title"
                   id="title"
-                  placeholder="e.g I will do something I'm really good at..."
+                  placeholder="e.g AC Installation"
                   className={`border w-full h-10 px-3 rounded-md outline-none text-sm border-gray-300 focus:border-primary`}
                   onChange={handleChange}
                  
@@ -119,6 +119,28 @@ const Add = () => {
                   className={`border w-full h-10 px-3 rounded-md outline-none text-sm appearance-none bg-[url(./assets/icons/dropDown.svg)] bg-no-repeat bg-[center_right_1.2rem] cursor-pointer border-gray-300 focus:border-primary`}
                 >
                   {options.map((item, i) => (
+                    <option key={i} value={item.value}>
+                      {item.text}
+                    </option>
+                  ))}
+                </select>
+               
+              </div>
+              <div className="flex flex-col w-full gap-1 items-start justify-start">
+                <label
+                  htmlFor="category"
+                  className="text-sm font-medium text-darkColor/80"
+                >
+                  City
+                </label>
+                <select
+                  name="city"
+                  id="city"
+                  onChange={handleChange}
+                  
+                  className={`border w-full h-10 px-3 rounded-md outline-none text-sm appearance-none bg-[url(./assets/icons/dropDown.svg)] bg-no-repeat bg-[center_right_1.2rem] cursor-pointer border-gray-300 focus:border-primary`}
+                >
+                  {gujaratCities.map((item, i) => (
                     <option key={i} value={item.value}>
                       {item.text}
                     </option>
@@ -273,7 +295,7 @@ const Add = () => {
                   id="shortTitle"
                   onChange={handleChange}
                  
-                  placeholder="e.g One page web design..."
+                  placeholder="e.g Expert AC installation services."
                   className={`border w-full h-10 px-3 rounded-md outline-none text-sm border-gray-300 focus:border-primary`}
                 />
              

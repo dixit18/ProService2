@@ -17,15 +17,19 @@ const ServiceSchema = new mongoose.Schema(
     },
     totalStars: {
       type: Number,
-      default: 1,
+      default: 0,
     },
     starNumber: {
       type: Number,
-      default: 1,
+      default: 0,
     },
     category: {
       type: String,
       
+      required: true,
+    },
+    city: {
+      type: String,
       required: true,
     },
     price: {
@@ -54,10 +58,7 @@ const ServiceSchema = new mongoose.Schema(
       type: [String],
       required: false,
     },
-    sales: {
-      type: Number,
-      default: 0,
-    },
+  
   },
   {
     timestamps: true,

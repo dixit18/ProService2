@@ -42,7 +42,8 @@ const ServiceDetails = ({ data, id, userId }) => {
         </div>
         {!isNaN(data?.totalStars / data?.starNumber) && (
           <div className="flex items-center justify-start gap-1 text-yellow-400 text-lg font-semibold">
-            {Array(Math.round(data?.totalStars / data?.starNumber))
+            {Array(Math.round(data?.totalStars / data?.starNumber)).length===0?"no rating yet":
+            Array(Math.round(data?.totalStars / data?.starNumber))
               .fill()
               .map((item, i) => (
                 <span key={i}>
@@ -90,35 +91,26 @@ const ServiceDetails = ({ data, id, userId }) => {
               {userData?.name}
             </h4>
             <div className="flex items-center justify-start gap-1 text-yellow-400 text-lg font-semibold">
-              {Array(Math.round(data?.totalStars / data?.starNumber))
+              {/* {console.log(Array(Math.round(data?.totalStars / data?.starNumber)),"array from 94")} */}
+              {!isNaN(data?.totalStars / data?.starNumber) && Array(Math.round(data?.totalStars / (data?.starNumber===0?1:data?.starNumber)))
                 .fill()
                 .map((item, i) => (
                   <span key={i}>
                     <BsStarFill />
                   </span>
                 ))}
-              <span>{Math.round(data?.totalStars / data?.starNumber)}</span>
+              <span>{!isNaN(Math.round(data?.totalStars / data?.starNumber))?Math.round(data?.totalStars / data?.starNumber):0}</span>
             </div>
-            {/* <button className="outline-none text-sm font-medium hover:bg-gray-400 hover:text-white transition-all duration-300 border border-gray-400 w-fit py-2 px-4 rounded">
-              Contact Me
-            </button> */}
+      
           </div>
         </div>
         <div className="border w-full lg:w-[83%] p-5 rounded flex flex-col items-start justify-start gap-5">
           <div className="w-full flex items-start justify-between gap-4">
             <div className="w-[50%] flex flex-col items-start justify-start gap-3">
               <div className="flex flex-col gap-1">
-                {/* <span className="text-gray-400 text-sm font-normal">From</span> */}
-                {/* <h2 className="text-darkColor font-medium">
-                  {userData?.country}
-                </h2> */}
+               
               </div>
-              {/* <div className="flex flex-col gap-1">
-                <span className="text-gray-400 text-sm font-normal">
-                  Avg. response time
-                </span>
-                <h2 className="text-darkColor font-medium">1 Hour</h2>
-              </div> */}
+            
               <div className="flex flex-col gap-1">
                 <span className="text-gray-400 text-sm font-normal">
                   Languages
@@ -133,12 +125,7 @@ const ServiceDetails = ({ data, id, userId }) => {
                 </span>
                 <h2 className="text-darkColor font-medium">Mar 2023</h2>
               </div>
-              {/* <div className="flex flex-col gap-1">
-                <span className="text-gray-400 text-sm font-normal">
-                  Last delivery
-                </span>
-                <h2 className="text-darkColor font-medium">1 day</h2>
-              </div> */}
+            
             </div>
           </div>
           <p className="text-darkColor text-sm font-medium border-t w-full pt-4 pr-4">

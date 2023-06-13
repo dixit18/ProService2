@@ -10,7 +10,7 @@ import { FiChevronRight } from "react-icons/fi";
 import { useSelector,useDispatch } from "react-redux";
 import { logoutAsync } from "../../redux/Slices/userSlice";
 import Profile from "../../pages/Profile/Profile";
-
+import { CometChat } from "@cometchat-pro/chat";
  
 const Navbar = () => {
   const dispatch = useDispatch()
@@ -18,13 +18,31 @@ const Navbar = () => {
   const [profileModel,setProfileModal] = useState(false)
   const navigate = useNavigate();
   const user= useSelector(state=>state.auth)
-
+console.log(user,"user From navbar")
   const [active, setActive] = useState(false);
   const [openDrop, setOpenDrop] = useState(false);
   const [showLink, setShowLink] = useState(false);
   const { pathname } = useLocation();
 
   const modalRef = useRef(null);
+useEffect(()=>{
+  if(user.id){
+    let authKey = "323381a8dcd5ea1dccaf9311acc0af4e44845425";
+var uid = `user${user.id}`;
+var name = user.name;
+
+var Chatuser = new CometChat.User(uid);
+Chatuser.setName(name);
+CometChat.createUser(Chatuser, authKey).then(
+  Chatuser => {
+        console.log("user created", Chatuser);
+    },error => {
+        console.log("error", error);
+    }
+)
+  }
+},[user.id])
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {

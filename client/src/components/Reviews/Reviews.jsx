@@ -200,6 +200,7 @@ const Reviews = ({ serviceId }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews"]);
+      queryClient.invalidateQueries(["service"]);
     }
   });
   
@@ -215,7 +216,7 @@ const Reviews = ({ serviceId }) => {
     <div className="w-full flex items-start justify-start flex-col gap-4">
     
     
-      <h2 className="text-active text-xl font-semibold">Reviews</h2>
+      {/* <h2 className="text-active text-xl font-semibold">Reviews</h2> */}
       {isLoading
         ? (
                   <div className="flex items-center justify-center w-full">
@@ -236,7 +237,12 @@ const Reviews = ({ serviceId }) => {
       <div className="w-full flex flex-col items-start justify-start gap-4 mt-4 border-t pt-3">
         <h3 className="text-active text-xl font-semibold">Add a review</h3>
         <form action=""  className="flex items-start flex-col gap-2 justify-start w-full" onSubmit={handleSubmit}>
-          <input type="textarea" cols="30"   rows="10" className="flex items-end w-full justify-between gap-4 md:flex-row flex-col" placeholder="write your opinion" />
+        <textarea
+    className="w-full h-40 p-2 border border-gray-300 rounded-md resize-none"
+    placeholder="Write your opinion"
+    rows={4}
+    cols={30}
+  ></textarea>
           <label
                   htmlFor="star"
                   className="text-sm font-medium cursor-pointer"

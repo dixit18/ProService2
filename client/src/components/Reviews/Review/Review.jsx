@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { BiLike, BiDislike } from "react-icons/bi";
 import { BsStarFill } from "react-icons/bs";
 import Avatar from "../../../assets/icons/avatar.jpg";
 import { Axios } from "../../../config";

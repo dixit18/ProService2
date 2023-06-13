@@ -8,6 +8,19 @@ const Stripe = require("stripe")
 const createBooking = catchAsync(async (req, res, next) => {
   const service = await ServiceModel.findById(req.params.id);
 
+if (service.userId.equals(req.user._id)) {
+  return next(new ErrorHandler("You can not book your own service",403))
+}
+const existingBooking = await BookingModel.findOne({
+  serviceId: service._id,
+  buyerId: req.user._id,
+  status: { $in: ["pending"] },
+});
+
+if (existingBooking) {
+  return next(new ErrorHandler("You already have a pending booking for this service", 400));
+}
+
   const newBooking = new BookingModel({
     serviceId: service._id,
     img: service.img,

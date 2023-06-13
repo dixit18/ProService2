@@ -46,3 +46,6 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
   };
   
   export default Pagination1;
+
+
+  // backend ma kar

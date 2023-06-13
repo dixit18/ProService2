@@ -8,21 +8,25 @@ import loader from "../../assets/icons/loader.svg";
 import requests from "../../libs/request";
 import { Axios } from "../../config";
 import { useSelector } from "react-redux";
-
+import {  useState } from "react";
+import Pagination from "../../utils/Pagination/Pagination";
 const MyServices = () => {
 
-  // const { authUser } = useAuthStore();
-  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const [currentPage, setCurrentPage] = useState(1);
   const queryClient = useQueryClient();
   const user = useSelector((state)=>state.auth)
   console.log(user,"in my service")
   const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ["myServices"],
+    queryKey: ["myServices",currentPage],
     queryFn: () =>
-      Axios.get(`${requests.services}?userId=${user.id}`).then(
-        (res) => res.data.services
+      Axios.get(`${requests.services}?userId=${user.id}&page=${currentPage}`).then(
+        (res) => res.data
       ),
   });
+
+const handlePageChange = (pageNumber) => {
+  setCurrentPage(pageNumber);
+};
 
   const mutation = useMutation({
     mutationFn: (id) => {
@@ -42,7 +46,7 @@ const MyServices = () => {
   }, []);
 
 
-  const tableActions = data?.map((item) => ({
+  const tableActions = data?.services?.map((item) => ({
     image: (
       <div className="w-14 h-14">
         <img
@@ -95,7 +99,7 @@ const MyServices = () => {
             </p>
           ) : (
             <>
-              {data?.length === 0 ? (
+              {data.services?.length === 0 ? (
                 <div className="flex items-center justify-center mt-5 flex-col w-full">
                   <img
                     src="https://cdni.iconscout.com/illustration/premium/thumb/error-404-4344461-3613889.png"
@@ -143,6 +147,15 @@ const MyServices = () => {
               )}
             </>
           )}
+           {data?.pagination?.totalPages > 1 && (
+            <div style={{ width: "100%" }}>
+              <Pagination
+                totalPages={data.pagination.totalPages}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+              />
+            </div>
+          )}
         </div>
       </div>
     </main>
@@ -150,3 +163,5 @@ const MyServices = () => {
 };
 
 export default MyServices;
+
+

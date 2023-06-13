@@ -18,6 +18,8 @@ import Pay from "./pages/pay/Pay";
 import NotFound from "../src/pages/Errors/NotFound";
 import { useSelector } from "react-redux";
 import { CometChat } from "@cometchat-pro/chat";
+import MapPage from "./pages/Map/MapPage";
+
 
 const App = () => {
   const appID = "240637384dc0fd25";
@@ -51,7 +53,10 @@ const App = () => {
         <Route path="/services/single/:id" element={<Service />} />
 
         {<Route path="/bookings" element={<Orders />} />}
-
+  
+       
+        <Route path="/map/:id" element={<MapPage/>}/>
+      
         {
           <>
             <Route path="/myservices" element={<MyServices />} />

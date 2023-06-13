@@ -7,6 +7,7 @@ import { Axios } from "../../config";
 import loader from "../../assets/icons/loader.svg";
 import requests from "../../libs/request";
 
+
 const Service = () => {
 
   
@@ -15,9 +16,12 @@ const Service = () => {
     queryKey: ["service"],
     queryFn: () =>
       Axios.get(`${requests.services}/single/${id}`).then((res) => res.data.service),
+     
+      
   });
-  
+  console.log(error,"outside")
   const userId = data?.userId;
+  
 console.log(id,"from service")
   return (
     <main className="py-40 pb-10">

@@ -69,14 +69,14 @@ const ServiceCard = ({ item }) => {
         </p>
         <p className="flex items-center justify-start gap-1 text-yellow-400 font-semibold px-4">
           <BsStarFill />
-          {!isNaN(item.totalStars / item.starNumber) &&
-            Math.round(item.totalStars / item.starNumber)}
-            {console.log( Math.round(item.totalStars / item.starNumber),"math")}
+          {!isNaN(item.totalStars / item.starNumber) ?
+            Math.round(item.totalStars / item.starNumber):0}
+            
         </p>
         <div className="border-t w-full p-5 flex items-center justify-between">
-          <span className="text-gray-400 cursor-pointer">
+          {/* <span className="text-gray-400 cursor-pointer">
             <BsFillHeartFill size={20} />
-          </span>
+          </span> */}
           <span className="text-sm font-normal text-gray-500">
             started AT{" "}
             <span className="text-xl font-semibold text-darkColor">

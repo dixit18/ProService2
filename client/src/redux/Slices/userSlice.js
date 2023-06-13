@@ -11,8 +11,8 @@ export const loginAsync = createAsyncThunk(
       email,
       password,
     });
-    console.log(response);
-    console.log('----------------------------------------->',response.data.user)
+   
+
 
     return response.data.user;
   
@@ -24,7 +24,7 @@ export const logoutAsync = createAsyncThunk("auth/logout", async () => {
   
   const response = await Axios.get(`${requests.logout}`);
 
-  console.log(response,"fhdfdhiu");
+ 
 });
 
 const initialState = {

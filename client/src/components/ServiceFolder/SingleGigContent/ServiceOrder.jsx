@@ -7,18 +7,25 @@ import { Link, useParams,useNavigate } from "react-router-dom";
 
 import { Axios } from "../../../config";
 import requests from "../../../libs/request";
-
+import { toast } from "react-toastify";
 const ServiceOrder = ({ data, id }) => {
-  console.log(id,"from upper")
+
   const {id:paramId} = useParams();
-  console.log(paramId,"oatd")
+ 
   const nevigate = useNavigate()
   
 const handleBooking = async (e)=>{
   e.preventDefault()
-const response = await Axios.post(`${requests.orders}/${id}`)
-nevigate('/bookings')
-console.log(response,"from serviceorder")
+  try{
+
+    const response = await Axios.post(`${requests.orders}/${id}`)
+    nevigate('/bookings')
+  }catch(err){
+    
+      toast.error(err.response.data.message,"inside on error")
+      
+    }
+
 }
 
   return (
