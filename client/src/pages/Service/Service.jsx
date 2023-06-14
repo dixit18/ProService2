@@ -1,6 +1,5 @@
 import React from "react";
 import ServiceDetails from "../../components/ServiceFolder/SingleGigContent/ServiceDetails";
-import ServiceOrder from "../../components/ServiceFolder/SingleGigContent/ServiceOrder";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Axios } from "../../config";
@@ -24,7 +23,7 @@ const Service = () => {
   
 console.log(id,"from service")
   return (
-    <main className="py-24 pb-10">
+    <main className="py-2 pb-10">
       <div className="contain">
         {isLoading ? (
           <div className="flex items-center justify-center w-full">
@@ -36,12 +35,9 @@ console.log(id,"from service")
           </p>
         ) : (
           <div className="w-full flex items-start justify-between gap-6 flex-col lg:flex-row">
-            <div className="w-full lg:w-[70%]">
+           
               <ServiceDetails data={data} id={id} userId={userId} />
-            </div>
-            <div className="w-full lg:w-[30%] sticky top-32">
-              <ServiceOrder data={data} id={id} />
-            </div>
+            
           </div>
         )}
       </div>

@@ -1,62 +1,47 @@
-import React, { useState, useEffect } from "react";
-import image1 from "../../../assets/images/hero1.png";
-import image2 from "../../../assets/images/hero2.png";
-import image3 from "../../../assets/images/hero3.png";
-import image4 from "../../../assets/images/hero4.png";
-import image5 from "../../../assets/images/hero5.png";
-import image6 from "../../../assets/images/hero6.png";
+/* eslint-disable react/react-in-jsx-scope */
+import { Link as NavLink } from "react-router-dom";
 
 const Hero = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showOpacityAnimation, setShowOpacityAnimation] = useState(false);
-
-  const changeImage = [image1, image2, image3, image4, image5, image6];
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === changeImage.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    // Show opacity animation for 3 seconds when the image changes
-    setShowOpacityAnimation(true);
-    const opacityAnimationTimeoutId = setTimeout(() => {
-      setShowOpacityAnimation(false);
-    }, 1000);
-
-    return () => clearTimeout(opacityAnimationTimeoutId);
-  }, [currentImageIndex]);
-
-  const heroStyle = {
-    backgroundImage: `url(${changeImage[currentImageIndex]})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  };
-
   return (
-    <section
-      className="w-full h-screen lg:h-[120vh] text-white pt-20 relative"
-      style={heroStyle}
-    >
-      <div className="contain flex flex-col items-start justify-center h-full relative z-10">
-        <div className="flex flex-col items-start justify-start gap-5 w-full">
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-semibold leading-[120%]">
-            Home Service <i className="font-light">On Demand</i> <br />{" "}
-          </h2>
-          <div className="flex items-center gap-5 sm:flex-wrap sm:flex-col font-weight:600">
-            <span>
-              Relocated or stuck in the middle of nowhere without an idea of
-              where to find artisans to fix your urgent task?
+    <div className="container mx-auto max-w-7xl">
+      <div className="flex flex-col md:flex-row py-20 md:py-28 items-center justify-center space-y-10 md:space-y-0">
+        <div className="flex-1 space-y-5 md:space-y-10">
+          <h1 className="font-semibold text-3xl sm:text-4xl lg:text-6xl leading-tight">
+            <span className="relative">
+              Home Service,
+              <div className="absolute w-full h-30% bg-gray-400 bottom-1 left-0 z-0"></div>
             </span>
+            <br />
+            <span className="text-gray-400">On Demand!</span>
+          </h1>
+          <p className="text-gray-500">
+         
+ProService is a convenient platform connecting users with local service providers. Find skilled professionals for various services such as plumbing, electrical work, gardening, and more. Enjoy top-quality services at competitive prices.
+          </p>
+          <div className="space-x-6 flex flex-col sm:flex-row">
+            <NavLink
+              to="/services"
+              className="rounded-full py-3 px-6 text-white bg-gray-500 hover:bg-gray transition-colors"
+            >
+              Get started
+            </NavLink>
+          </div>
+        </div>
+        <div className="flex-1 relative w-full">
+          <div className="absolute w-150% h-150% bg-gray-200 top--20 left-0 z-0"></div>
+          <div className="relative h-300 rounded-2xl shadow-2xl overflow-hidden">
+            <button className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+             
+            </button>
+            <img
+              className="w-full h-full object-cover"
+              src="https://res.cloudinary.com/dvy5v1l8h/image/upload/v1686721959/Images/kkh3d7mx0wskxxc5lepy.jpg"
+              alt="Hero Image"
+            />
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

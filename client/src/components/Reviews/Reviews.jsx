@@ -41,8 +41,10 @@ const nevigate = useNavigate()
   });
   
 const user = useSelector(state=>state.auth)
+console.log(user,"user fro m reviw")
   const handleSubmit = (e) => {
-    if(!user.isLoggedIn){
+    if(!user.isLoogedIn
+      ){
       nevigate("/login")
       return
     }
@@ -79,7 +81,7 @@ const user = useSelector(state=>state.auth)
         <h3 className="text-active text-xl font-semibold">Add a review</h3>
         <form action=""  className="flex items-start flex-col gap-2 justify-start w-full" onSubmit={handleSubmit}>
         <textarea
-    className="w-full h-40 p-2 border border-gray-300 rounded-md resize-none"
+    className="w-full h-28 p-2 border border-gray-300 rounded-md resize-none"
     placeholder="Write your opinion"
     rows={4}
     cols={30}
@@ -105,3 +107,4 @@ const user = useSelector(state=>state.auth)
 };
 
 export default Reviews;
+

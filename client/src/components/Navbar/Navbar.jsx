@@ -5,48 +5,48 @@ import RegistrationForm from "../../pages/register/Register";
 import Avatar from "../../assets/icons/avatar.jpg";
 import { toast } from "react-toastify";
 
-
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { logoutAsync } from "../../redux/Slices/userSlice";
 import Profile from "../../pages/Profile/Profile";
 import { CometChat } from "@cometchat-pro/chat";
- 
+
 const Navbar = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [input, setInput] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [profileModel,setProfileModal] = useState(false)
+  const [profileModel, setProfileModal] = useState(false);
   const navigate = useNavigate();
-  const user= useSelector(state=>state.auth)
+  const user = useSelector((state) => state.auth);
 
   const [active, setActive] = useState(false);
   const [openDrop, setOpenDrop] = useState(false);
   const { pathname } = useLocation();
 
   const modalRef = useRef(null);
-useEffect(()=>{
-  if(user.id){
-    let authKey = "323381a8dcd5ea1dccaf9311acc0af4e44845425";
-var uid = `user${user.id}`;
-var name = user.name;
+  useEffect(() => {
+    if (user.id) {
+      let authKey = "323381a8dcd5ea1dccaf9311acc0af4e44845425";
+      var uid = `user${user.id}`;
+      var name = user.name;
 
-var Chatuser = new CometChat.User(uid);
-Chatuser.setName(name);
-CometChat.createUser(Chatuser, authKey).then(
-  Chatuser => {
-        console.log("user created", Chatuser);
-    },error => {
-        console.log("error", error);
+      var Chatuser = new CometChat.User(uid);
+      Chatuser.setName(name);
+      CometChat.createUser(Chatuser, authKey).then(
+        (Chatuser) => {
+          console.log("user created", Chatuser);
+        },
+        (error) => {
+          console.log("error", error);
+        }
+      );
     }
-)
-  }
-},[user.id])
-
+  }, [user.id]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         setOpenDrop(false);
-        setProfileModal(false)
+        setProfileModal(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -65,12 +65,13 @@ CometChat.createUser(Chatuser, authKey).then(
     };
   }, []);
 
-
+  const handleSubmit = () => {
+    navigate("/services?search=${input}");
+  };
 
   const handleLogout = async () => {
     try {
-    
-      dispatch(logoutAsync())
+      dispatch(logoutAsync());
       toast.success("Logout Successfully", {
         position: "bottom-right",
         toastId: 1,
@@ -84,7 +85,7 @@ CometChat.createUser(Chatuser, authKey).then(
 
   return (
     <header
-      className={`flex items-center justify-center w-full flex-col text-white fixed top-0 transition-all ease-in-out z-20 ${
+      className={`flex items-center justify-center w-full flex-col text-black fixed top-0 transition-all ease-in-out z-20 ${
         active || pathname !== "/" ? "bg-white !text-darkColor" : ""
       }`}
     >
@@ -99,46 +100,6 @@ CometChat.createUser(Chatuser, authKey).then(
             </Link>
           </div>
           <nav className="flex items-center justify-end gap-7 font-medium text-base">
-            <div className="relative mx-auto text-gray-600 lg:block hidden">
-              <input
-                className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
-                type="search"
-                name="search"
-                placeholder="Search"
-              />
-              <button
-                type="submit"
-                className="absolute right-0 top-0 mt-3 mr-2"
-              >
-                <svg
-                  className="text-gray-600 h-4 w-4 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  version="1.1"
-                  id="Capa_1"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 56.966 56.966"
-                  style={{
-                    enableBackground: "new 0 0 56.966 56.966",
-                  }}
-                  xmlSpace="preserve"
-                  width="512px"
-                  height="512px"
-                >
-                  <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                </svg>
-              </button>
-            </div>
-            <NavLink
-              to="/services"
-              className="cursor-pointer hidden hover:text-indigo-600 sm:flex"
-            >
-              Services
-            </NavLink>
-
-            {!user?.isServiceProvider && (
-              <p className="cursor-pointer hidden lg:flex">Pro Apply</p>
-            )}
             {user.isLoogedIn ? (
               <>
                 {user && (
@@ -152,16 +113,20 @@ CometChat.createUser(Chatuser, authKey).then(
                       className="w-[32px] h-[32px] rounded-[50%] object-cover"
                     />
                     <span>{user?.name}</span>
-                    
+
                     <div
                       ref={modalRef}
                       className={`absolute top-12 right-0 p-3 z-10 bg-white border rounded-md text-black flex-col items-start gap-3 w-[200px] font-medium transition-transform duration-300 ${
                         openDrop ? "flex" : "hidden"
                       }`}
                     >
-                      <NavLink to="/" onClick={()=>setProfileModal(true)} className="cursor-pointer text-black hidden hover:text-indigo-600 sm:flex">
-              Profile
-            </NavLink>
+                      <NavLink
+                        to="/"
+                        onClick={() => setProfileModal(true)}
+                        className="cursor-pointer text-black hidden hover:text-indigo-600 sm:flex"
+                      >
+                        Profile
+                      </NavLink>
                       {user?.isServiceProvider && (
                         <>
                           <NavLink
@@ -218,9 +183,9 @@ CometChat.createUser(Chatuser, authKey).then(
           </nav>
         </div>
       </div>
-     
-        <hr className="border-black" />
-     
+
+      <hr className="border-black" />
+
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div
@@ -233,19 +198,15 @@ CometChat.createUser(Chatuser, authKey).then(
         </div>
       )}
 
-
- {profileModel && (
+      {profileModel && (
         <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex items-center justify-center">
           <div className="relative max-w-md mx-auto md:max-w-2xl mt-6 min-w-0 break-words bg-gray-200 w-full mb-6 shadow-lg rounded-xl">
-           <Profile/>
-           </div>
-         </div>
+            <Profile />
+          </div>
+        </div>
       )}
-
     </header>
   );
 };
 
-export  {Navbar};
-
-
+export { Navbar };

@@ -5,8 +5,8 @@ import React from 'react'
 
 const FAQ = () => {
   return (
-   <>
-   <h1  className="text-primary text-center font-bold text-2xl px-4 py-2 my-4">Frequently Asked Questions</h1>
+   <div className='py-6'>
+   <h1  className="text-primary text-center font-bold text-2xl  px-4 py-2 my-4">Frequently Asked Questions</h1>
    <Accordion>
   <Accordion.Panel>
     <Accordion.Title>
@@ -205,7 +205,7 @@ const FAQ = () => {
     </Accordion.Content>
   </Accordion.Panel>
 </Accordion>
-   </>
+   </div>
   )
 }
 

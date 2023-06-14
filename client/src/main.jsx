@@ -10,8 +10,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Provider } from "react-redux";
 import store from '../src/redux/store'
-// import { ChakraProvider, chakraTheme:theme } from "@chakra-ui/react";
-import { ChakraProvider, theme as chakraTheme } from "@chakra-ui/react";
+
 
 const theme = createTheme({
     palette: {

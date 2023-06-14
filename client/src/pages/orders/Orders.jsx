@@ -20,7 +20,8 @@ const Orders = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isClicked, setIsClicked] = useState("");
   const user = useSelector((state) => state.auth);
-  console.log(user.address,"user address")
+  
+
   const navigate = useNavigate();
 
   const { isLoading, error, data, refetch } = useQuery({
@@ -85,7 +86,7 @@ const Orders = () => {
   };
 
   const tableActions = data?.data?.map((item) => {
-    
+   
 
     const isStatusCompleted = item.status === "completed";
   const isRejected = item.status === "rejected";
@@ -146,16 +147,21 @@ const urlFormap = user.isServiceProvider?item.buyerId._id:item.iserviceProviderI
       </div>
     ),
       title: (
-        <p
+        
+      
+        <Link to={`/services/single/${item.serviceId}`}
         className={`w-full flex items-center justify-start ${
           isRejected ? "line-through" : ""
         }`}
         style={{
           color: isRejected ? "red" : isStatusCompleted ? "#3949AB" : "",
         }}
-      >
+        >
         {item.title}
-      </p>
+      </Link>
+       
+     
+      
       ),
       price: (
         <p className="w-full flex items-center justify-start">{item.price}</p>
@@ -229,17 +235,19 @@ const urlFormap = user.isServiceProvider?item.buyerId._id:item.iserviceProviderI
                     {tableActions &&
                       tableActions.map((row, i) => (
                         <tr
-                          key={i}
-                          className="text-sm leading-5 w-full even:bg-gray-200"
+                        key={i}
+                        className="text-sm leading-5 w-full even:bg-gray-200"
                         >
+                         
                           {ordersColumns?.map((col, i) => (
                             <td
-                              key={i}
-                              className="first:text-left text-sm text-darkColor font-medium text-center py-2"
+                            key={i}
+                            className="first:text-left text-sm text-darkColor font-medium text-center py-2"
                             >
                               {row[col.field]}
                             </td>
                           ))}
+                          
                         </tr>
                       ))}
                   </tbody>
