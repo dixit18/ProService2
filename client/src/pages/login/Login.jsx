@@ -29,7 +29,7 @@ function Login() {
   };
 
   return (
-    <div
+    <div className="py-64"
       style={{
         display: "flex",
         justifyContent: "center",
@@ -37,7 +37,7 @@ function Login() {
         minHeight: "75vh",
       }}
     >
-      <div style={{ maxWidth: "300px", width: "100%" }}>
+      <div  style={{ maxWidth: "300px", width: "100%" }} >
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <h1 className="text-indigo-600 text-2xl font-bold">
             Login with Your Credentials

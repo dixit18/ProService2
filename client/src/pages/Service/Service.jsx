@@ -24,7 +24,7 @@ const Service = () => {
   
 console.log(id,"from service")
   return (
-    <main className="py-40 pb-10">
+    <main className="py-24 pb-10">
       <div className="contain">
         {isLoading ? (
           <div className="flex items-center justify-center w-full">
@@ -39,7 +39,7 @@ console.log(id,"from service")
             <div className="w-full lg:w-[70%]">
               <ServiceDetails data={data} id={id} userId={userId} />
             </div>
-            <div className="w-full lg:w-[30%] sticky top-40">
+            <div className="w-full lg:w-[30%] sticky top-32">
               <ServiceOrder data={data} id={id} />
             </div>
           </div>

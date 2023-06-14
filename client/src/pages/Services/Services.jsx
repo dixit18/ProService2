@@ -1,6 +1,5 @@
-
 import React, { useRef, useState, useEffect } from "react";
-import { BiHomeAlt, BiChevronDown } from "react-icons/bi";
+import { BiChevronDown } from "react-icons/bi";
 import { useQuery } from "@tanstack/react-query";
 import { Axios } from "../../config";
 import loader from "../../assets/icons/loader.svg";
@@ -44,7 +43,6 @@ const Services = () => {
         url += `&sort=${sort}`;
       }
 
-      // Add pagination parameters to the URL
       url += `&page=${currentPage}`;
 
       return Axios.get(url).then((res) => res.data);
@@ -56,7 +54,7 @@ const Services = () => {
   }, [sort, currentPage]);
 
   const apply = () => {
-    setCurrentPage(1); // Reset to first page when applying filters
+    setCurrentPage(1);
     refetch();
   };
 
@@ -64,25 +62,14 @@ const Services = () => {
     setCurrentPage(pageNumber);
   };
 
-  const newSearch = search.split("?category=");
-  const newCat = newSearch[1]?.split("%20").join(" ");
-
   return (
-    <main className="py-32 pb-10 ">
+    <main className="pt-20 pb-18">
       <div className="contain">
         <div className="flex items-start justify-start flex-col gap-4">
-          <div className="flex items-center justify-start gap-2 sm:gap-4 text-darkColor font-medium">
-            <span>
-              <BiHomeAlt size={12} />
-            </span>
-            <span>/</span>
-            <span className="text-sm">{newCat ? newCat : "ProService"}</span>
-            <span>/</span>
-          </div>
-          <h2 className="text-3xl font-bold">Services</h2>
+          <h2 className="text-3xl font-bold text-primary">Services</h2>
           <p className="text-base font-medium">Find a Service you need</p>
-          <div className="w-full flex md:items-center justify-between flex-col md:flex-row gap-4">
-            <div className="flex md:items-center items-start justify-start gap-2 flex-col md:flex-row ">
+          <div className="w-full  flex md:items-center justify-between flex-col md:flex-row gap-4">
+            <div className="flex md:items-center items-start justify-start gap-2 flex-col md:flex-row">
               <p className="text-base font-normal text-gray-500">Budget:</p>
               <div className="flex items-center justify-start gap-2 w-full">
                 <input
@@ -109,7 +96,7 @@ const Services = () => {
               <p className="text-base font-normal text-gray-500">Sort by:</p>
               <div className="flex items-center justify-start gap-2 cursor-pointer relative">
                 <div
-                  className="flex items-center justify-start gap-2 cursor-pointer relative px-2 h-[40px] rounded-md text-gray-500 border w-[45%] md:w-fit"
+                  className="flex items-center justify-start gap-2 cursor-pointer relative px-2 h-[40px] rounded-md text-gray-500 border w-[45%] md:w-fit z-10"
                   onClick={() => setOpen((prev) => !prev)}
                 >
                   <p className="text-sm w-full">
@@ -126,7 +113,7 @@ const Services = () => {
                 <div
                   className={`${
                     open ? "flex" : "hidden"
-                  } flex-col items-start justify-start bg-white shadow-box rounded-md absolute w-[140px] top-8 right-2`}
+                  } flex-col items-start justify-start bg-white shadow-box rounded-md absolute w-[140px] top-8 right-2 z-20`}
                 >
                   {sort === "sales" ? (
                     <div
@@ -194,7 +181,7 @@ const Services = () => {
               </>
             )}
           </div>
-          {console.log(data?.totalPages, "data toatl page", data)}
+
           {data?.pagination.totalPages > 1 && (
             <div style={{ width: "100%" }}>
               <Pagination

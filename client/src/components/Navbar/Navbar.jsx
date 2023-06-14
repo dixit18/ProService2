@@ -4,9 +4,8 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import RegistrationForm from "../../pages/register/Register";
 import Avatar from "../../assets/icons/avatar.jpg";
 import { toast } from "react-toastify";
-import { Axios } from "../../config";
-import requests from "../../libs/request";
-import { FiChevronRight } from "react-icons/fi";
+
+
 import { useSelector,useDispatch } from "react-redux";
 import { logoutAsync } from "../../redux/Slices/userSlice";
 import Profile from "../../pages/Profile/Profile";
@@ -18,10 +17,9 @@ const Navbar = () => {
   const [profileModel,setProfileModal] = useState(false)
   const navigate = useNavigate();
   const user= useSelector(state=>state.auth)
-console.log(user,"user From navbar")
+
   const [active, setActive] = useState(false);
   const [openDrop, setOpenDrop] = useState(false);
-  const [showLink, setShowLink] = useState(false);
   const { pathname } = useLocation();
 
   const modalRef = useRef(null);
@@ -67,25 +65,11 @@ CometChat.createUser(Chatuser, authKey).then(
     };
   }, []);
 
-  const slideRight = () => {
-    let slider = document.getElementById("navSlider");
-    let maxScrollLeft = slider.scrollWidth - slider.clientWidth; // maximum scroll position
-    if (slider.scrollLeft < maxScrollLeft) {
-      // check if not at the end
-      slider.scrollLeft = slider.scrollLeft + 400;
-    } else {
-      // if at end, wrap to beginning
-      slider.scrollLeft = 0;
-    }
-  };
 
-  // let user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = async () => {
     try {
-      // await Axios.get(requests.logout);
-      // removeAuthUser();
-      // localStorage.setItem("user", null);
+    
       dispatch(logoutAsync())
       toast.success("Logout Successfully", {
         position: "bottom-right",
@@ -234,27 +218,9 @@ CometChat.createUser(Chatuser, authKey).then(
           </nav>
         </div>
       </div>
-      <div
-        className={`w-full transition-all duration-300 border-b ${
-          active || pathname !== "/" ? "flex" : "hidden"
-        }`}
-      >
+     
         <hr className="border-black" />
-        <div className="contain relative">
-          <div
-            id={"navSlider"}
-            className={`w-full inline-block h-full whitespace-nowrap scroll-smooth lg:flex items-center lg:justify-between py-3 overflow-x-auto gap-5 font-medium scrollbar-hide text-sm relative ${
-              active || pathname !== "/" ? "!text-gray-500" : "text-gray-200"
-            }`}
-          ></div>
-          <span
-            onClick={slideRight}
-            className="absolute z-10 top-3 -right-8 cursor-pointer laptop:hidden"
-          >
-            <FiChevronRight size={20} />
-          </span>
-        </div>
-      </div>
+     
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div

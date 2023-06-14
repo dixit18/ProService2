@@ -41,7 +41,7 @@ const Orders = () => {
       const response = await Axios.patch(`${requests.orders}/${acceptId}`, {
         status: "accepted",
       });
-      console.log(response, "responser form order ");
+     
     } catch (err) {
       console.log(err);
     }
@@ -72,9 +72,11 @@ const Orders = () => {
           border: "2px solid black",
           borderRadius: "8px",
           backgroundColor: `${color}`,
-          width: "80px",
-          height: "30px",
+          width: "85px",
+          // height: "35px",
           paddingTop: "4px",
+          text:"white",
+          textweight: "bold",
         }}
       >
         <h6>{text}</h6>
@@ -83,16 +85,17 @@ const Orders = () => {
   };
 
   const tableActions = data?.data?.map((item) => {
+    
 
     const isStatusCompleted = item.status === "completed";
   const isRejected = item.status === "rejected";
-const urlFormap = user.isServiceProvider?item.buyerId:item.iserviceProviderId;
+const urlFormap = user.isServiceProvider?item.buyerId._id:item.iserviceProviderId._id;
 
     let actionButton;
-    console.log("item ", item);
+   
     if (!user.isServiceProvider) {
       if (item.status === "pending") {
-        actionButton = <Box color={"#34ebd2"} text={"pending"}></Box>;
+        actionButton = <Box color={"#34ebd2"} text={"Pending"}></Box>;
       } else if (item.status === "accepted") {
         actionButton = (
           <Link to={`/pay/${item._id}`}>
@@ -102,7 +105,7 @@ const urlFormap = user.isServiceProvider?item.buyerId:item.iserviceProviderId;
       } else if (item.status === "completed") {
         actionButton = <Box color={"#8e2ffa"} text={"Completed"}></Box>;
       } else {
-        actionButton = <Box color={"red"} text={"Rejected"}></Box>;
+        actionButton = <Box color={"#d92733"} text={"Rejected"}></Box>;
       }
     } else {
       actionButton = (
@@ -129,13 +132,26 @@ const urlFormap = user.isServiceProvider?item.buyerId:item.iserviceProviderId;
     }
 
     return {
+      info: (
+        <div className="w-14 h-14 relative">
+        <img
+          src={user.isServiceProvider ? item.buyerId.avatar : item.iserviceProviderId.avatar}
+          alt={item.title}
+          className="w-full h-full object-cover rounded-full"
+        />
+        <div className="absolute top-0 left-0 bg-gray-800 text-white p-2 rounded-md opacity-0 hover:opacity-100 transition-opacity duration-300">
+          <p className="text-sm font-medium">Name:{user.isServiceProvider ? item.buyerId.name : item.iserviceProviderId.name}</p>
+          <p className="text-xs">Address:{user.isServiceProvider ? item.buyerId.address : item.iserviceProviderId.address}</p>
+        </div>
+      </div>
+    ),
       title: (
         <p
         className={`w-full flex items-center justify-start ${
           isRejected ? "line-through" : ""
         }`}
         style={{
-          color: isRejected ? "red" : isStatusCompleted ? "green" : "",
+          color: isRejected ? "red" : isStatusCompleted ? "#3949AB" : "",
         }}
       >
         {item.title}
@@ -146,7 +162,7 @@ const urlFormap = user.isServiceProvider?item.buyerId:item.iserviceProviderId;
       ),
       Contact: (
         <div
-          className={`w-8 h-8 cursor-pointer bg-blue-600 rounded-full flex items-center justify-center text-white ${
+          className={`w-8 h-8 cursor-pointer bg-indigo-600 rounded-full flex items-center justify-center text-white ${
             !isStatusCompleted ? "opacity-50 pointer-events-none" : ""
           }`}
         >
@@ -156,7 +172,7 @@ const urlFormap = user.isServiceProvider?item.buyerId:item.iserviceProviderId;
       actions: <div>{actionButton}</div>,
       map: (
         <Link to={`/map/${urlFormap}`}
-          className={`w-8 h-8 cursor-pointer bg-blue-600 rounded-full flex items-center justify-center text-white 
+          className={`w-8 h-8 cursor-pointer bg-indigo-600 rounded-full flex items-center justify-center text-white 
           ${
             !isStatusCompleted ? "opacity-50 pointer-events-none" : ""
           }`}
@@ -169,11 +185,11 @@ const urlFormap = user.isServiceProvider?item.buyerId:item.iserviceProviderId;
   });
 
   return (
-    <main className="pt-40 pb-10">
+    <main className="pt-24 pb-10">
       <div className="contain">
         <div className="w-full flex flex-col items-start gap-5 justify-start">
           <div className="flex items-center justify-between w-full gap-2">
-            {<h2 className="text-2xl font-bold">{`${user.isServiceProvider?"Appoinments":"Bookings"}`}</h2>}
+            {<h2 className="text-2xl text-indigo-600 font-bold">{`${user.isServiceProvider?"Appoinments":"Bookings"}`}</h2>}
           </div>
           {isLoading ? (
             <div className="flex items-center justify-center w-full">
@@ -186,15 +202,13 @@ const urlFormap = user.isServiceProvider?item.buyerId:item.iserviceProviderId;
           ) : (
             <>
               {data?.data.length === 0 ? (
-                <div className="flex items-center justify-center mt-5 flex-col w-full">
+                <div className="flex items-center justify-center mt-5 flex-col w-full pb-24 pt-24">
                   <img
                     src="https://cdni.iconscout.com/illustration/premium/thumb/error-404-4344461-3613889.png"
                     alt="/"
                     className="w-[350px]"
                   />
-                  <h2 className="text-4xl text-active font-medium">
-                    No Order Data
-                  </h2>
+               
                 </div>
               ) : (
                 <table className="w-full">

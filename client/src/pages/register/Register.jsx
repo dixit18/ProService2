@@ -10,8 +10,9 @@ import requests from "../../libs/request";
 import { toast } from "react-toastify";
 import loader from "../../assets/icons/loader.svg";
 import { BsUpload } from "react-icons/bs";
-import { registerSchema } from "../../schemas";
+
 import upload from "../../libs/upload";
+import { gujaratCities } from "../../libs/data";
 
 function Register({ setShowModal }) {
   const [file, setFile] = useState(null);
@@ -125,18 +126,25 @@ function Register({ setShowModal }) {
                 />
               </div>
               <div>
-                <label className="block mb-1" htmlFor="pincode">
-                  Pincode
+                <label className="block mb-1" htmlFor="city">
+                  City
                 </label>
-                <input
+                <select
                   className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-500"
-                  id="pincode"
-                  name="pincode"
-                  type="text"
+                  id="city"
+                  name="city"
+                  type="number"
                   placeholder="12345"
                   onChange={handleChange}
                   required
-                />
+                >
+{gujaratCities.map((item, i) => (
+                    <option key={i} value={item.value}>
+                      {item.text}
+                    </option>
+                  ))}
+
+                </select>
               </div>
               <div>
                 <label className="block mb-1" htmlFor="address">
@@ -165,6 +173,7 @@ function Register({ setShowModal }) {
                   required
                 />
               </div>
+            
               <div>
                 <div className="flex items-center">
                   <input
@@ -179,6 +188,7 @@ function Register({ setShowModal }) {
                   </label>
                 </div>
               </div>
+              
               <div className="col-span-2">
                 <button
                   className="bg-indigo-500 text-primary px-6 py-2 rounded-md hover:bg-indigo-600 transition-colors"

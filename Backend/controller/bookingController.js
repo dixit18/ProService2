@@ -42,7 +42,7 @@ if (existingBooking) {
 
 const getBooking = catchAsync(async (req, res, next) => {
   const page = parseInt(req.query.page) || 1; // Current page number
-  const limit = 9; // Number of documents per page
+  const limit = 7; // Number of documents per page
 
   const skip = (page - 1) * limit; // Number of documents to skip
 
@@ -57,7 +57,9 @@ const getBooking = catchAsync(async (req, res, next) => {
   const booking = await BookingModel.find(query)
     .sort({ createdAt: -1 })
     .skip(skip)
-    .limit(limit);
+    .limit(limit)
+    .populate('buyerId', 'avatar name address') 
+    .populate('iserviceProviderId', 'avatar name address');
 
   res.json({
     currentPage: page,
@@ -66,7 +68,7 @@ const getBooking = catchAsync(async (req, res, next) => {
   });
 });
 
-const updateBooking = catchAsync (async(req, res) => {
+const updateBookingStatus = catchAsync (async(req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 console.log(status)
@@ -138,5 +140,5 @@ console.log(booking,"from order");
 module.exports = {
   createBooking,
   getBooking,createPaymentIntent,confirm,
-  updateBooking
+  updateBookingStatus
 };

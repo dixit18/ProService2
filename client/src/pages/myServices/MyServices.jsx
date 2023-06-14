@@ -78,7 +78,7 @@ const handlePageChange = (pageNumber) => {
   }));
 
   return (
-    <main className="py-40">
+    <main className="pt-40 pb-18">
       <div className="contain">
         <div className="w-full flex flex-col items-start gap-5 justify-start">
           <div className="flex items-center justify-between w-full gap-2">

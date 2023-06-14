@@ -10,7 +10,7 @@ const { default: mongoose } = require("mongoose");
 //public
 //sign up
 const signupUser = catchAsync(async (req, res, next) => {
-  const { name, email, password, isServiceProvider, address, phone, avatar } =
+  const { name, email, password, isServiceProvider, address, phone, avatar,city } =
     req.body;
 
   const newUser = await User.create({
@@ -21,8 +21,9 @@ const signupUser = catchAsync(async (req, res, next) => {
     address,
     phone,
     avatar,
-
-    // avatar:req.file.filename
+    city,
+    
+   
   });
 
   await sendEmail({
@@ -63,7 +64,7 @@ const loginUser = catchAsync(async (req, res, next) => {
     return next(new ErrorHandler("Password doesn't match", 401));
   }
   sendCookie(user, 201, res);
-  // createSendToken(user, 200, res);
+  
 });
 
 // /api/v1/user/logout

@@ -3,18 +3,25 @@ import React from "react";
 
 import { BsCheckLg } from "react-icons/bs";
 
-import { Link, useParams,useNavigate } from "react-router-dom";
-
+import { Link,useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Axios } from "../../../config";
 import requests from "../../../libs/request";
 import { toast } from "react-toastify";
+
 const ServiceOrder = ({ data, id }) => {
 
-  const {id:paramId} = useParams();
+ const user = useSelector(state=>state.auth)
  
   const nevigate = useNavigate()
   
 const handleBooking = async (e)=>{
+  if(!user.isLoggedIn){
+    console.log("inside if block")
+    nevigate("/login")
+    return
+  }
+
   e.preventDefault()
   try{
 

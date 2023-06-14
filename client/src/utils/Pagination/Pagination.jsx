@@ -18,7 +18,7 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
   
     return (
         <div
-        style={{ display: "flex", marginTop: "3rem", justifyContent: "center" }}
+        style={{ display: "flex", marginTop: "3rem", justifyContent: "center",marginBottom:"3rem" }}
       >
        
         <Stack spacing={2} justifyContent="center">

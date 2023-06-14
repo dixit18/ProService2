@@ -17,7 +17,8 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       validate: [validator.isEmail, "Please provide a valid email"],
     },
-    pincode: {
+   
+    city:{
       type: String,
       required: true,
     },
@@ -65,6 +66,11 @@ userSchema.pre("save", async function (next) {
   }
   next();
 });
+userSchema.methods.toJSON = function () {
+  const user = this.toObject();
+  delete user.password;
+  return user;
+};
 
 userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);

@@ -666,7 +666,11 @@ export const columns = [
   },
 ];
 export const ordersColumns = [
-  
+  {
+    field:"info",
+    header:"Info",
+  }
+  ,
   {
     field: "title",
     header: "Title",
