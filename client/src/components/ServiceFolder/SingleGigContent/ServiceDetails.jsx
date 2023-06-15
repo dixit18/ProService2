@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BsCheckLg } from "react-icons/bs";
+import Slider from "react-slick";
 
 
 const ProductDetail = ({ data, id, userId }) => {
@@ -26,6 +27,7 @@ const ProductDetail = ({ data, id, userId }) => {
     enabled: !!userId,
   });
 
+  
   const user = useSelector((state) => state.auth);
   console.log(user, "user from service");
   const nevigate = useNavigate();

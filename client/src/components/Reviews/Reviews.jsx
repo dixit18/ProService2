@@ -41,8 +41,9 @@ const nevigate = useNavigate()
   });
   
 const user = useSelector(state=>state.auth)
-console.log(user,"user fro m reviw")
-  const handleSubmit = (e) => {
+
+ 
+const handleSubmit = (e) => {
     if(!user.isLoogedIn
       ){
       nevigate("/login")
@@ -53,6 +54,7 @@ console.log(user,"user fro m reviw")
     const desc = e.target[0].value;
     const star = e.target[1].value;
     mutation.mutate({ serviceId:serviceId, star, desc:desc, });
+    e.target.reset();
   };
 
   return (

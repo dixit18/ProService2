@@ -7,15 +7,20 @@ import requests from "../../libs/request";
 import { useLocation } from "react-router-dom";
 import ServiceCard from "../../components/ServiceFolder/ServiceCard/ServiceCard";
 import Pagination from "../../utils/Pagination/Pagination";
+import { gujaratCities } from "../../libs/data";
+import { useSelector } from "react-redux";
 
 const Services = () => {
+  const user = useSelector(state=>state.auth)
+  console.log(user,"user from services")
   const { search } = useLocation();
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("sales");
   const minRef = useRef();
   const maxRef = useRef();
+  const cityRef = useRef();
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [selectedCity, setSelectedCity] = useState(user.isLoggedIn ? user.city : "");
   const reSort = (types) => {
     setSort(types);
     setOpen(false);
@@ -24,12 +29,7 @@ const Services = () => {
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["services", currentPage],
     queryFn: () => {
-      let url;
-      if (search) {
-        url = `${requests.services}${search}`;
-      } else {
-        url = `${requests.services}?`;
-      }
+      let url = `${requests.services}${search ? search : "?"}`;
 
       if (minRef.current.value) {
         url += `&min=${minRef.current.value}`;
@@ -38,14 +38,16 @@ const Services = () => {
       if (maxRef.current.value) {
         url += `&max=${maxRef.current.value}`;
       }
-
-      if (sort) {
-        url += `&sort=${sort}`;
+      if (cityRef.current.value) {
+        url += `&city=${cityRef.current.value}`;
       }
+
+      url += `&sort=createdAt`; // Sort by newest
 
       url += `&page=${currentPage}`;
 
       return Axios.get(url).then((res) => res.data);
+
     },
   });
 
@@ -60,6 +62,11 @@ const Services = () => {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+  const handleCityChange = (event) => {
+    setSelectedCity(event.target.value);
+    setCurrentPage(1);
+    refetch();
   };
 
   return (
@@ -96,46 +103,30 @@ const Services = () => {
               <p className="text-base font-normal text-gray-500">Sort by:</p>
               <div className="flex items-center justify-start gap-2 cursor-pointer relative">
                 <div
-                  className="flex items-center justify-start gap-2 cursor-pointer relative px-2 h-[40px] rounded-md text-gray-500 border w-[45%] md:w-fit z-10"
+                  className="flex items-center justify-start gap-2 cursor-pointer relative  h-[40px] rounded-md text-gray-500 border w-[45%] md:w-fit z-10"
                   onClick={() => setOpen((prev) => !prev)}
                 >
-                  <p className="text-sm w-full">
-                    {sort === "sales" ? "Best Selling" : "Newest"}
-                  </p>
-                  <span
-                    className={`${
-                      open ? "rotate-180" : "rotate-0"
-                    } transition-all duration-300`}
-                  >
-                    <BiChevronDown size={20} />
-                  </span>
-                </div>
-                <div
-                  className={`${
-                    open ? "flex" : "hidden"
-                  } flex-col items-start justify-start bg-white shadow-box rounded-md absolute w-[140px] top-8 right-2 z-20`}
-                >
-                  {sort === "sales" ? (
-                    <div
-                      onClick={() => reSort("createdAt")}
-                      className="px-4 py-2 w-full border-b text-gray-500 text-sm cursor-pointer"
-                    >
-                      Newest
-                    </div>
-                  ) : (
-                    <div
-                      onClick={() => reSort("sales")}
-                      className="px-4 py-2 w-full border-b text-gray-500 text-sm cursor-pointer"
-                    >
-                      Best Selling
-                    </div>
-                  )}
-                  <span
-                    className="px-4 py-2 w-full border-b text-gray-500 text-sm cursor-pointer"
-                    onClick={() => reSort("sales")}
-                  >
-                    Popular
-                  </span>
+                  
+                  
+              <select
+                ref={cityRef}
+                className="border outline-none px-2 h-[40px] rounded-md text-gray-500"
+                onChange={handleCityChange}
+              >
+             {user.isLoogedIn ? (
+                      // Select the user's city by default
+                     
+                      <option value={user.city}>{user.city}</option>
+                    ) : (
+                      // Show a default empty option
+                      <option value="">All Cities</option>
+                    )}
+                    {gujaratCities.map((item, i) => (
+                      <option key={i} value={item.value}>
+                        {item.text}
+                      </option>
+                    ))}
+              </select>
                 </div>
               </div>
             </div>

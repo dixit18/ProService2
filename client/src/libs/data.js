@@ -120,6 +120,7 @@ export const featureData = [
   ];
 
 export const gujaratCities = [
+
   { value: "Ahmedabad", text: "Ahmedabad" },
   { value: "Amreli", text: "Amreli" },
   { value: "Anand", text: "Anand" },

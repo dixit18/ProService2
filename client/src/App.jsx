@@ -19,6 +19,7 @@ import NotFound from "../src/pages/Errors/NotFound";
 import { useSelector } from "react-redux";
 import { CometChat } from "@cometchat-pro/chat";
 import MapPage from "./pages/Map/MapPage";
+import Dashboard from "./pages/Admin/Admin";
 
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
       <Navbar />
       {console.log("hello", user)}
       <Routes>
+        <Route path="/admin" element={<Dashboard/>}/>
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />

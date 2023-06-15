@@ -40,30 +40,7 @@ const getService = catchAsync(async (req, res, next) => {
 
   res.status(200).json({ service });
 });
-// const getServices = catchAsync(async (req, res, next) => {
-//   const queryObj = req.query;
 
-//   const filters = {
-//     ...(queryObj.userId && { userId: queryObj.userId }),
-//     ...(queryObj.category && { category: queryObj.category }),
-//     ...((queryObj.min || queryObj.max) && {
-//       price: {
-//         ...(queryObj.min && { $gt: queryObj.min }),
-//         ...(queryObj.max && { $lt: queryObj.max }),
-//       },
-//     }),
-//     ...(queryObj.search && {
-//       title: { $regex: queryObj.search, $options: "i" },
-//     }),
-//   };
-//   const services = await ServiceModel.find(filters).sort({
-//     [queryObj.sort]: -1,
-//   });
-
-//   if (!services) next(new ErrorHandler("no services found", 404));
-
-//   res.status(200).json({ services });
-// });
 const getServices = catchAsync(async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 4; // Adjust the limit as per your preference
@@ -82,6 +59,7 @@ const getServices = catchAsync(async (req, res, next) => {
     ...(queryObj.search && {
       title: { $regex: queryObj.search, $options: 'i' },
     }),
+    ...(queryObj.city && { city: queryObj.city }), 
   };
 
   const services = await ServiceModel.find(filters)

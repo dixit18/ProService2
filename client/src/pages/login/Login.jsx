@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Button, Label, TextInput } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginAsync } from "../../redux/Slices/userSlice";
 
 
@@ -12,10 +12,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log(setLoginModel(false))
-  const user = useSelector((state) => state.auth);
-  console.log(user,"user");
- 
+  
+  
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -23,7 +23,7 @@ function Login() {
 
       navigate("/");
     } catch (err) {
-      console.log(err);
+     
       toast.error(err.response.data.message);
     }
   };

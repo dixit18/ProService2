@@ -16,7 +16,7 @@ import { gujaratCities } from "../../libs/data";
 
 function Register({ setShowModal }) {
   const [file, setFile] = useState(null);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -58,7 +58,8 @@ function Register({ setShowModal }) {
       navigate("/login");
     } catch (err) {
       console.log(err);
-      setError(err.response.data.message);
+      toast.error(err.response.data.message)
+      
     }
   };
 
@@ -197,7 +198,7 @@ function Register({ setShowModal }) {
                   Register
                 </button>
               </div>
-              {error && <div className="text-red-500 col-span-2">{error}</div>}
+              
             </form>
           </div>
         </div>

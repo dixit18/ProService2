@@ -39,6 +39,18 @@ const Navbar = () => {
           console.log("error", error);
         }
       );
+
+
+   
+
+CometChat.login(uid, authKey).then(
+  user => {
+    console.log("Login Successful:", { user });    
+  },
+  error => {
+    console.log("Login failed with exception:", { error });    
+  }
+);
     }
   }, [user.id]);
 

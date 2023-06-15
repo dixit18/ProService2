@@ -156,15 +156,7 @@ import {
           <HStack spacing={4} mt={4} justifyContent="space-between">
             <Text>Distance: {distance} </Text>
             <Text>Duration: {duration} </Text>
-            <IconButton
-              aria-label="center back"
-              icon={<FaLocationArrow />}
-              isRound
-              onClick={() => {
-                map.panTo(center);
-                map.setZoom(15);
-              }}
-            />
+          
           </HStack>
         </Box>
       </Flex>

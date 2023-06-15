@@ -10,8 +10,16 @@ const { default: mongoose } = require("mongoose");
 //public
 //sign up
 const signupUser = catchAsync(async (req, res, next) => {
+
   const { name, email, password, isServiceProvider, address, phone, avatar,city } =
     req.body;
+
+    const existingUser = await User.findOne({ email });
+   
+    if (existingUser) {
+      return next(new ErrorHandler('User with this email already exists' , 400))
+    }
+  
 
   const newUser = await User.create({
     name,
