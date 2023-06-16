@@ -38,7 +38,8 @@ const ServiceCard = ({ item }) => {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
-
+  const starRating = Math.round(item?.totalStars / item?.starNumber);
+  const hasRating = !isNaN(starRating);
   return (
     <Link
       to={`/services/single/${item._id}`}
@@ -76,13 +77,19 @@ const ServiceCard = ({ item }) => {
         </div>
         <p className="text-darkColor text-base group-hover:text-primary">
           {truckcateString(item.desc, 60)}
-        </p>
-        <div className="flex items-center gap-1 text-yellow-400 font-semibold">
-          <BsStarFill />
-          {!isNaN(item.totalStars / item.starNumber)
-            ? Math.round(item.totalStars / item.starNumber)
-            : 0}
-        </div>
+        </p><>
+        {hasRating ? (
+          <div className="flex items-center justify-start gap-1 text-yellow-400 text-lg font-semibold">
+    {Array(starRating).fill().map((_, i) => (
+      <span key={i}>
+        <BsStarFill />
+      </span>
+    ))}
+    <span>{starRating}</span>
+  </div>):
+    <span className="text-red-500">No rating yet</span>
+  }
+          </>
         <div className="border-t flex items-center justify-between">
           <span className="text-sm font-normal text-gray-500">
             Started at{" "}

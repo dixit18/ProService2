@@ -12,6 +12,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 const Add = () => {
+  console.log("from servicdn kjdkjdfjldfijs dasjbpard add")
   const [singleFile, setSingleFile] = useState(undefined);
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
@@ -80,7 +81,7 @@ const Add = () => {
     }, 5000);
   };
   return (
-    <main className="py-40 pb-20">
+    <main className=" pb-20">
       <div className="contain">
         <div className="flex flex-col w-full gap-4 items-start justify-start">
           <h2 className="text-2xl font-bold">Add New Service</h2>
@@ -334,7 +335,7 @@ const Add = () => {
                   <input
                     type="text"
                     id="features"
-                    placeholder="e.g page design"
+                    placeholder="e.g 24/7 availability"
                     className="border w-full h-10 px-3 rounded-md outline-none text-sm border-gray-300 focus:border-primary"
                   />
                   <button

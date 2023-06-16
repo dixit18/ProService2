@@ -86,7 +86,7 @@ const Orders = () => {
   };
 
   const tableActions = data?.data?.map((item) => {
-   
+
 
     const isStatusCompleted = item.status === "completed";
   const isRejected = item.status === "rejected";
@@ -131,6 +131,8 @@ const urlFormap = user.isServiceProvider?item.buyerId._id:item.iserviceProviderI
         </div>
       );
     }
+
+
 
     return {
       info: (
@@ -191,11 +193,11 @@ const urlFormap = user.isServiceProvider?item.buyerId._id:item.iserviceProviderI
   });
 
   return (
-    <main className="pt-24 pb-10">
+    <main className={` pb-10 ${user.isServiceProvider?"":"pt-20"}`}>
       <div className="contain">
         <div className="w-full flex flex-col items-start gap-5 justify-start">
           <div className="flex items-center justify-between w-full gap-2">
-            {<h2 className="text-2xl text-indigo-600 font-bold">{`${user.isServiceProvider?"Appoinments":"Bookings"}`}</h2>}
+            {<h2 className="text-2xl text-indigo-600 font-bold">{`${user.isServiceProvider?" ":"Bookings"}`}</h2>}
           </div>
           {isLoading ? (
             <div className="flex items-center justify-center w-full">

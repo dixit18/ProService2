@@ -146,11 +146,7 @@ import {
               <Button colorScheme="pink" type="submit" onClick={calculateRoute}>
                 Calculate Route
               </Button>
-              {/* <IconButton
-                aria-label="center back"
-                icon={<FaTimes />}
-                onClick={clearRoute}
-              /> */}
+              
             </ButtonGroup>
           </HStack>
           <HStack spacing={4} mt={4} justifyContent="space-between">

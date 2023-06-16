@@ -10,6 +10,7 @@ import { Axios } from "../../config";
 import { useSelector } from "react-redux";
 import {  useState } from "react";
 import Pagination from "../../utils/Pagination/Pagination";
+import { Outlet } from 'react-router-dom';
 const MyServices = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -78,7 +79,9 @@ const handlePageChange = (pageNumber) => {
   }));
 
   return (
-    <main className="pt-40 pb-18">
+    <>
+ 
+    <main className="pt-18 pb-20">
       <div className="contain">
         <div className="w-full flex flex-col items-start gap-5 justify-start">
           <div className="flex items-center justify-between w-full gap-2">
@@ -107,7 +110,7 @@ const handlePageChange = (pageNumber) => {
                     className="w-full md:w-[350px]"
                   />
                   <h2 className="text-4xl text-active font-medium">
-                    No Orders!
+                    No Services!
                   </h2>
                 </div>
               ) : (
@@ -159,6 +162,7 @@ const handlePageChange = (pageNumber) => {
         </div>
       </div>
     </main>
+    </>
   );
 };
 

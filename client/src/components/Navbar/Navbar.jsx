@@ -8,11 +8,10 @@ import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutAsync } from "../../redux/Slices/userSlice";
 import Profile from "../../pages/Profile/Profile";
-import { CometChat } from "@cometchat-pro/chat";
+
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const [input, setInput] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [profileModel, setProfileModal] = useState(false);
   const navigate = useNavigate();
@@ -23,36 +22,6 @@ const Navbar = () => {
   const { pathname } = useLocation();
 
   const modalRef = useRef(null);
-  useEffect(() => {
-    if (user.id) {
-      let authKey = "323381a8dcd5ea1dccaf9311acc0af4e44845425";
-      var uid = `user${user.id}`;
-      var name = user.name;
-
-      var Chatuser = new CometChat.User(uid);
-      Chatuser.setName(name);
-      CometChat.createUser(Chatuser, authKey).then(
-        (Chatuser) => {
-          console.log("user created", Chatuser);
-        },
-        (error) => {
-          console.log("error", error);
-        }
-      );
-
-
-   
-
-CometChat.login(uid, authKey).then(
-  user => {
-    console.log("Login Successful:", { user });    
-  },
-  error => {
-    console.log("Login failed with exception:", { error });    
-  }
-);
-    }
-  }, [user.id]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -77,10 +46,7 @@ CometChat.login(uid, authKey).then(
     };
   }, []);
 
-  const handleSubmit = () => {
-    navigate("/services?search=${input}");
-  };
-
+ 
   const handleLogout = async () => {
     try {
       dispatch(logoutAsync());
@@ -139,34 +105,22 @@ CometChat.login(uid, authKey).then(
                       >
                         Profile
                       </NavLink>
-                      {user?.isServiceProvider && (
-                        <>
-                          <NavLink
-                            to="/myservices"
-                            className="cursor-pointer w-full text-sm text-darkColor"
-                          >
-                            MyServices
-                          </NavLink>
-                          <NavLink
-                            to="/add"
-                            className="cursor-pointer w-full text-sm text-darkColor"
-                          >
-                            Add New Service
-                          </NavLink>
-                        </>
-                      )}
-                      <NavLink
+                      
+                    { !user.isServiceProvider &&  <>
+                     <NavLink
                         to="/bookings"
                         className="cursor-pointer w-full text-sm text-darkColor"
-                      >
+                        >
                         Bookings
                       </NavLink>
-                      <NavLink
+                      {/* <NavLink
                         to="/messages"
                         className="cursor-pointer w-full text-sm text-darkColor"
-                      >
+                        >
                         Messages
-                      </NavLink>
+                      </NavLink> */}
+                        </>
+                        }
                       <div
                         onClick={handleLogout}
                         className="cursor-pointer w-full text-sm text-darkColor"

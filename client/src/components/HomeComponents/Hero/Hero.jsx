@@ -19,6 +19,7 @@ const Hero = () => {
 ProService is a convenient platform connecting users with local service providers. Find skilled professionals for various services such as plumbing, electrical work, gardening, and more. Enjoy top-quality services at competitive prices.
           </p>
           <div className="space-x-6 flex flex-col sm:flex-row">
+
             <NavLink
               to="/services"
               className="rounded-full py-3 px-6 text-white bg-gray-500 hover:bg-gray transition-colors"

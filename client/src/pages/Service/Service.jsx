@@ -1,5 +1,5 @@
 import React from "react";
-import ServiceDetails from "../../components/ServiceFolder/SingleGigContent/ServiceDetails";
+import ServiceDetails from "../../components/ServiceFolder/SingleServiceContent/ServiceDetails";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Axios } from "../../config";

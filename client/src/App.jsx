@@ -19,54 +19,40 @@ import NotFound from "../src/pages/Errors/NotFound";
 import { useSelector } from "react-redux";
 import { CometChat } from "@cometchat-pro/chat";
 import MapPage from "./pages/Map/MapPage";
-import Dashboard from "./pages/Admin/Admin";
-
+import Dashboard from "./pages/DashBoard/Dashboard";
 
 const App = () => {
-  const appID = "240637384dc0fd25";
-  const region = "us";
-  const appSetting = new CometChat.AppSettingsBuilder()
-    .subscribePresenceForAllUsers()
-    .setRegion(region)
-    .build();
-  CometChat.init(appID, appSetting).then(
-    () => {
-      console.log("Initialization completed successfully");
-      // You can now call login function.
-    },
-    (error) => {
-      console.log("Initialization failed with error:", error);
-      // Check the reason for error and take appropriate action.
-    }
+  const isLoogedIn = useSelector((state) => state.auth.isLoogedIn);
+  const isServiceProvider = useSelector(
+    (state) => state.auth.isServiceProvider
   );
-
-  const user = useSelector((state) => state.auth.isLoogedIn);
-  console.log("user from app", user);
+  console.log("isLoogedIn from app", isLoogedIn);
   return (
     <div>
       <Navbar />
-      {console.log("hello", user)}
+      {console.log("hello", isLoogedIn)}
+      {isServiceProvider && <Dashboard />}
       <Routes>
-        <Route path="/admin" element={<Dashboard/>}/>
-        <Route path="/" element={<Homepage />} />
+        {isServiceProvider}
+       {!isServiceProvider &&  (<>
+       <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/services" element={<Services />} />
         <Route path="/services/single/:id" element={<Service />} />
-
-        {<Route path="/bookings" element={<Orders />} />}
-  
-       
-        <Route path="/map/:id" element={<MapPage/>}/>
-      
-        {
-          <>
-            <Route path="/myservices" element={<MyServices />} />
-            <Route path="/add" element={<Add />} />
-          </>
+       </>
+        )
+        
         }
-        <Route path="/pay/:id" element={<Pay />} />
-        <Route path="/success" element={<Success />} />
+        {isLoogedIn && <Route path="/bookings" element={<Orders />} />}
+        {isLoogedIn && <Route path="/map/:id" element={<MapPage />} />}
+        {<Route path="/add" element={<Add />} />}
+
+        {isLoogedIn && <Route path="/myservices" element={<MyServices />} />}
+
+        {isLoogedIn && <Route path="/pay/:id" element={<Pay />} />}
+        {isLoogedIn && <Route path="/success" element={<Success />} />}
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
