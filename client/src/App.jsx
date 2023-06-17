@@ -10,7 +10,7 @@ import Service from "./pages/Service/Service";
 import MyServices from "./pages/myServices/MyServices";
 import Add from "./pages/add/Add";
 import ProtectedRoute from "./components/ProtectedRoute/PrivateRoute";
-
+import ServiceProviderDashboard from './pages/DashBoard/ServiceProviderHome'
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Success from "./pages/success/Success";
@@ -20,7 +20,9 @@ import { useSelector } from "react-redux";
 import { CometChat } from "@cometchat-pro/chat";
 import MapPage from "./pages/Map/MapPage";
 import Dashboard from "./pages/DashBoard/Dashboard";
-
+import Video from "./pages/Conversasion/Video"
+import VideoChat from "./pages/Conversasion/VideoChat";
+import Room from "./pages/Conversasion/Room";
 const App = () => {
   const isLoogedIn = useSelector((state) => state.auth.isLoogedIn);
   const isServiceProvider = useSelector(
@@ -33,17 +35,20 @@ const App = () => {
       {console.log("hello", isLoogedIn)}
       {isServiceProvider && <Dashboard />}
       <Routes>
+        {   isServiceProvider ? <Route path="/" element={<ServiceProviderDashboard/>}/>:<Route path="/" element={<Homepage />} />}
         {isServiceProvider}
        {!isServiceProvider &&  (<>
-       <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/services" element={<Services />} />
         <Route path="/services/single/:id" element={<Service />} />
        </>
-        )
-        
-        }
+        )}
+       
+        <Route path="/video" element={<Video />} />
+        <Route path="/video/:videoId" element={<Room/>}/>
+
+
         {isLoogedIn && <Route path="/bookings" element={<Orders />} />}
         {isLoogedIn && <Route path="/map/:id" element={<MapPage />} />}
         {<Route path="/add" element={<Add />} />}

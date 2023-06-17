@@ -186,6 +186,8 @@ console.log(id)
     res.status(400).json({ message: err.message });
   }
 };
+//bs hve chat baki che
+// map kai rite  implement karyo google map
 module.exports = {
   signupUser,
   loginUser,

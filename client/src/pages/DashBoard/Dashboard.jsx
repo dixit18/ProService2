@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
    <div style={{paddingTop:60,paddingBottom:30,}}>
 <ServiceNavbar/>
-<ServiceProviderDashboard/>
+{/* <ServiceProviderDashboard/> */}
    </div>
   )
 }

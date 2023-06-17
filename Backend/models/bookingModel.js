@@ -28,19 +28,13 @@ const BookingSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    paid: {
-      type: Boolean,
-      default: false,
-    },
+   
     payment: {
       type: String,
       default: false,
     },
     
-    isCompleted:{
-      type:Boolean,
-      default:false
-    },
+    
     status: {
       type: String,
       enum: ['pending', 'accepted', 'completed', 'rejected'],

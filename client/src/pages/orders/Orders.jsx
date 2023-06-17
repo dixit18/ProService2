@@ -16,6 +16,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Pagination from "../../utils/Pagination/Pagination";
 
 
+
 const Orders = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isClicked, setIsClicked] = useState("");
@@ -169,13 +170,14 @@ const urlFormap = user.isServiceProvider?item.buyerId._id:item.iserviceProviderI
         <p className="w-full flex items-center justify-start">{item.price}</p>
       ),
       Contact: (
-        <div
+        <Link to={`/video/${item.serviceId}`}
           className={`w-8 h-8 cursor-pointer bg-indigo-600 rounded-full flex items-center justify-center text-white ${
             !isStatusCompleted ? "opacity-50 pointer-events-none" : ""
           }`}
         >
+
           <MdMail size={18} />
-        </div>
+        </Link>
       ),
       actions: <div>{actionButton}</div>,
       map: (

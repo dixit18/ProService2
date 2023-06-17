@@ -3,13 +3,9 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis } from "recharts";
 import { Axios } from "../../config";
 import requests from "../../libs/request";
 import { useQuery } from "@tanstack/react-query";
-import ChartComponent from './Chart'
-const data = [
-  { name: "Page A", uv: 400, pv: 2400, amt: 2400 },
-  { name: "Page c", uv: 400, pv: 2400, amt: 2400 },
-  { name: "Page B", uv: 200, pv: 2400, amt: 2400 },
-  { name: "Page D", uv: 300, pv: 2400, amt: 2400 },
-];
+import ChartComponent from './BarChart'
+import EChartComponent from './PieChart'
+
 
 const ServiceProviderHome = () => {
   const { isLoading, data } = useQuery({
@@ -19,12 +15,8 @@ const ServiceProviderHome = () => {
         return res.data;
       }),
   });
-  const chartData = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], // Replace with your labels data
-    data: [120, 200, 150, 80, 70, 110, 130] // Replace with your data
-  };
-
-  console.log(data,"dataform sdasjk",data?.totalRevenue[0].total)
+  
+  console.log(data,"dataform sdasjk",data?.chartDataForPie)
   return (
   
     <>
@@ -88,16 +80,16 @@ const ServiceProviderHome = () => {
             </div>
           </div>
           <div className="flex justify-center pb-10 space-x-4">
-  <div className="w-1/2 rounded-xl mt-4 p-4 bg-white shadow-lg">
+  <div className=" w-1/2 rounded-xl mt-4 p-4 bg-white shadow-lg">
     <h1 className="text-xl font-bold text-gray-800 mt-4">Today’s Status</h1>
     <div className="flex justify-around space-x-4 text-center mt-6">
-      <ChartComponent chartData={chartData} />
+      <ChartComponent chartData={data?.chartData} />
     </div>
   </div>
   <div className="w-1/2 rounded-xl mt-4 p-4 bg-white shadow-lg">
     <h1 className="text-xl font-bold text-gray-800 mt-4">Today’s Status</h1>
     <div className="flex justify-between space-x-4 text-center mt-6">
-      {/* Content for the second box */}
+    <EChartComponent data={data?.chartDataForPie} />
     </div>
   </div>
 </div>
