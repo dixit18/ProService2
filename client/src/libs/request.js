@@ -8,6 +8,7 @@ const   requests = {
   orders: "/bookings",
   conversations: "/api/conversation",
   messages: "/api/messages",
+  dashboard:"/dashboard"
 };
 
 export default requests;

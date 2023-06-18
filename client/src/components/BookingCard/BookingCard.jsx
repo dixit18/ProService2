@@ -9,7 +9,7 @@ import { Axios } from "../../../config";
 import requests from "../../../libs/request";
 import { useQuery } from "@tanstack/react-query";
 
-const ServiceCard = ({ item }) => {
+const BokingCard = ({ item }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { isLoading, data } = useQuery({
     queryKey: [item.userId],
@@ -114,4 +114,4 @@ const ServiceCard = ({ item }) => {
   );
 };
 
-export default ServiceCard;
+export default BokingCard;

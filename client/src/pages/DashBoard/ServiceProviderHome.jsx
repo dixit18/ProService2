@@ -12,12 +12,13 @@ const ServiceProviderHome = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["dashboard"],
     queryFn: () =>
-      Axios.get(`${requests.orders}/dashboard`).then((res) => {
+      Axios.get(`${requests.dashboard}`).then((res) => {
         return res.data;
       }),
   });
   
   console.log(data,"dataform sdasjk",data?.chartDataForPie)
+  console.log(isLoading,"is loading state")
   return (
   
     <>
@@ -38,7 +39,7 @@ const ServiceProviderHome = () => {
               <img src="https://i.imgur.com/Qnmqkil.png" alt="" />
               <div className="text-center">
                 <h1 className="text-4xl font-bold text-gray-800">
-                {isLoading?0: <CountingAnimation targetNumber={data?.monthlyCompletedRequest}/>}
+                {isLoading? 0 : <CountingAnimation targetNumber={data?.monthlyCompletedRequest}/>}
                   
                   </h1>
                 <span className="text-gray-500">Total Completed Request</span>

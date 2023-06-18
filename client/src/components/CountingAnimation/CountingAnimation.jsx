@@ -7,8 +7,9 @@ const CountingAnimation = ({ targetNumber }) => {
     const interval = setInterval(() => {
       setCount(prevCount => prevCount + 1);
     }, 10); // Adjust the interval to control the speed of the animation
-
+    console.log(targetNumber,"jkiijnekdek")
     if (count === targetNumber) {
+      
       clearInterval(interval);
     }
 

@@ -24,12 +24,13 @@ const userRoute = require('./routes/userRoutes')
 const serviceRoute = require('./routes/servicesRoute')
 const bookingRoute = require('./routes/bookingRoute')
 const reviewRoute = require('./routes/reviewRoute');
-
+const dashboardRoute = require('./routes/dashboardRoute')
 
 app.use('/api/v1/user',userRoute)
 app.use('/api/v1/services',serviceRoute)
 app.use('/api/v1/bookings',bookingRoute)
 app.use('/api/v1/reviews',reviewRoute)
+app.use('/api/v1/dashboard',dashboardRoute)
 
 
 app.use(errorMiddleware)

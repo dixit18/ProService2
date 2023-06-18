@@ -26,7 +26,7 @@ const Success = () => {
   }, []);
  
   return (
-    <div className="py-60 pb-68">
+    <div className="py-52">
       <div className="contain">
         <div className="flex w-full items-center justify-center flex-col">
           <div className="border border-primary max-w-[400px] rounded p-4 flex items-center justify-center flex-col gap-4">
