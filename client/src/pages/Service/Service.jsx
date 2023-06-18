@@ -18,7 +18,7 @@ const Service = () => {
      
       
   });
-  console.log(error,"outside")
+ 
   const userId = data?.userId;
   
 console.log(id,"from service")

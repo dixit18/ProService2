@@ -43,11 +43,11 @@ const ServiceCard = ({ item }) => {
   return (
     <Link
       to={`/services/single/${item._id}`}
-      className="w-full shadow-box  border group relative transition-transform duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+      className="w-full  shadow-box  border group relative transition-transform duration-300 transform hover:-translate-y-1 hover:shadow-lg"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="bg-white pt-5  flex items-start flex-col gap-3 justify-start p-4">
+      <div className="bg-white pb-5  flex items-start flex-col gap-3 justify-start p-4">
       <img
         src={item?.cover}
         alt={item?.shortDesc}

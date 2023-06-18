@@ -1,15 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { useFormik } from "formik";
-import CustomizeInput from "../../utils/Input/CustomizeInput";
-import CustomizeTextArea from "../../utils/Input/CustomizeTextarea";
 import { useNavigate } from "react-router-dom";
 import {Axios}  from "../../config";
 import requests from "../../libs/request";
 import { toast } from "react-toastify";
-import loader from "../../assets/icons/loader.svg";
-import { BsUpload } from "react-icons/bs";
 
 import upload from "../../libs/upload";
 import { gujaratCities } from "../../libs/data";

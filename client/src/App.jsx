@@ -45,8 +45,8 @@ const App = () => {
        </>
         )}
        
-        <Route path="/video" element={<Video />} />
-        <Route path="/video/:videoId" element={<Room/>}/>
+        {/* <Route path="/video" element={<Video />} />
+        <Route path="/video/:videoId" element={<Room/>}/> */}
 
 
         {isLoogedIn && <Route path="/bookings" element={<Orders />} />}

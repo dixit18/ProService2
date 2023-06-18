@@ -21,7 +21,7 @@ function Login() {
     try {
       dispatch(loginAsync({ email, password }));
 
-      navigate("/");
+      navigate(-1);
     } catch (err) {
      
       toast.error(err.response.data.message);
@@ -29,12 +29,12 @@ function Login() {
   };
 
   return (
-    <div className="py-64"
+    <div className="py-58"
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "75vh",
+        minHeight: "85vh",
       }}
     >
       <div  style={{ maxWidth: "300px", width: "100%" }} >
@@ -70,7 +70,7 @@ function Login() {
           <Button type="submit" style={{ backgroundColor: "#4821e7cc" }}>
             Login
           </Button>
-        </form>
+        </form >
       </div>
     </div>
   );

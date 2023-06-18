@@ -73,7 +73,6 @@ const Services = () => {
     <main className="pt-20 pb-18">
       <div className="contain">
         <div className="flex items-start justify-start flex-col gap-4">
-          <h2 className="text-3xl font-bold text-primary">Services</h2>
           <p className="text-base font-medium">Find a Service you need</p>
           <div className="w-full  flex md:items-center justify-between flex-col md:flex-row gap-4">
             <div className="flex md:items-center items-start justify-start gap-2 flex-col md:flex-row">
@@ -132,7 +131,7 @@ const Services = () => {
             </div>
           </div>
           <div
-            className={`w-full grid-cols-1 sm:grid-cols-2 tab:grid-cols-3 lg:grid-cols-4 items-start justify-start gap-8 ${
+            className={`py-4 w-full grid-cols-1 sm:grid-cols-2 tab:grid-cols-3 lg:grid-cols-4 items-start justify-start gap-8 ${
               isLoading || error || data?.services?.length === 0
                 ? "flex"
                 : "grid"
