@@ -1,9 +1,9 @@
 import React from 'react'
 import ServiceNavbar from './ServiceNav/ServiceNavbar'
-import ServiceProviderDashboard from './ServiceProviderHome'
+
 const Dashboard = () => {
   return (
-   <div style={{paddingTop:60,paddingBottom:30,}}>
+   <div style={{paddingTop:60}}>
 <ServiceNavbar/>
 {/* <ServiceProviderDashboard/> */}
    </div>

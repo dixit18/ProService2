@@ -6,8 +6,8 @@ const CountingAnimation = ({ targetNumber }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCount(prevCount => prevCount + 1);
-    }, 10); // Adjust the interval to control the speed of the animation
-    console.log(targetNumber,"jkiijnekdek")
+    }, 1); // Adjust the interval to control the speed of the animation
+   
     if (count === targetNumber) {
       
       clearInterval(interval);

@@ -172,7 +172,7 @@ const Orders = () => {
 
   return (
     <main className={`pb-10 ${user.isServiceProvider ? '' : 'pt-20'}`}>
-      <div className="contain">
+      <div className="contain min-h-[525px]">
         <div className="w-full flex flex-col items-start gap-5 justify-start">
           <div className="flex items-center justify-between w-full gap-2">
             <h2 className="text-2xl text-indigo-600 font-bold">

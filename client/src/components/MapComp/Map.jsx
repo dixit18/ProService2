@@ -93,6 +93,7 @@ function Map() {
       alignItems="center"
       h="75vh"
       w="100vw"
+      minHeight="500px"
       marginTop={`${isServiceProvider ? 5 : 100}`}
     >
       <Box position="absolute" left={0} top={0} h="100%" w="100%">

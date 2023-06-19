@@ -70,8 +70,8 @@ const Services = () => {
   };
 
   return (
-    <main className="pt-20 pb-18">
-      <div className="contain">
+    <main className="  pt-20 pb-18">
+      <div className="min-h-[630px] contain">
         <div className="flex items-start justify-start flex-col gap-4">
           <p className="text-base font-medium">Find a Service you need</p>
           <div className="w-full  flex md:items-center justify-between flex-col md:flex-row gap-4">

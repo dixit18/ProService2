@@ -9,7 +9,7 @@ import CheckoutForm from "../../components/PayContents/CheckoutForm/CheckoutForm
 const stripePromise = loadStripe(
   "pk_test_51MtpnXSCeYZkwV5deC134dDTJqOjfzRjcO8W5kZEF4QmKX8vKd5qSAPSClaMdZYyhfBx817sut3voYm7TDwzXlv700OcS16Gpb"
 );
-console.log("inside pay form")
+
 const Pay = () => {
   const { id } = useParams();
   console.log(id ,"from _id")
@@ -37,7 +37,7 @@ const Pay = () => {
   };
 
   return (
-    <div className="py-48 pb-40">
+    <div className="min-h-[695px] py-48 pb-40">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />

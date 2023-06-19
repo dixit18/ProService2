@@ -3,7 +3,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { columns } from "../../data/data";
-// import useAuthStore from "../../stores";
 import loader from "../../assets/icons/loader.svg";
 import requests from "../../libs/request";
 import { Axios } from "../../config";
@@ -81,8 +80,8 @@ const handlePageChange = (pageNumber) => {
   return (
     <>
  
-    <main className="pt-18 pb-20">
-      <div className="contain">
+    <main className="pt-18 ">
+      <div className="contain min-h-[565px]">
         <div className="w-full flex flex-col items-start gap-5 justify-start">
           <div className="flex items-center justify-between w-full gap-2">
             <h2 className="text-2xl font-bold">My Services</h2>
@@ -114,7 +113,7 @@ const handlePageChange = (pageNumber) => {
                   </h2>
                 </div>
               ) : (
-                <table className="w-full">
+                <table className="w-full ">
                   <thead className="h-[35px]">
                     <tr>
                       {columns &&
