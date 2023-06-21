@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import ChartComponent from './BarChart'
 import EChartComponent from './PieChart'
 import CountingAnimation from "../../components/CountingAnimation/CountingAnimation";
+import CountUp from 'react-countup';
 
 
 const ServiceProviderHome = () => {
@@ -17,8 +18,8 @@ const ServiceProviderHome = () => {
       }),
   });
   
-  console.log(data,"dataform sdasjk",data?.chartDataForPie)
-  console.log(isLoading,"is loading state")
+  
+
   return (
   
     <>
@@ -29,7 +30,7 @@ const ServiceProviderHome = () => {
               <img src="https://i.imgur.com/VHc5SJE.png" alt="" />
               <div className="text-center">
                 <h1 className="text-4xl font-bold text-gray-800">
-                   {isLoading?0: <CountingAnimation targetNumber={data?.totalBooking}/>}
+                   {isLoading?0: <CountUp end={data?.totalBooking}/>}
                   
                   </h1>
                 <span className="text-gray-500">Total Booking</span>
@@ -39,7 +40,7 @@ const ServiceProviderHome = () => {
               <img src="https://i.imgur.com/Qnmqkil.png" alt="" />
               <div className="text-center">
                 <h1 className="text-4xl font-bold text-gray-800">
-                {isLoading? 0 : <CountingAnimation targetNumber={data?.monthlyCompletedRequest}/>}
+                {isLoading? 0 : <CountUp end={data?.monthlyCompletedRequest}/>}
                   
                   </h1>
                 <span className="text-gray-500">Total Completed Request</span>
@@ -49,7 +50,7 @@ const ServiceProviderHome = () => {
               <img src="https://i.imgur.com/dJeEVcO.png" alt="" />
               <div className="text-center">
                 <h1 className="text-4xl font-bold text-gray-800">
-                        {isLoading?0: <CountingAnimation targetNumber= {data?.totalRevenue[0].total}/>}
+                        {isLoading?0: <CountUp end= {data?.totalRevenue[0]}/>}
                  
                   </h1>
                 <span className="text-gray-500">Revenue</span>
@@ -65,7 +66,7 @@ const ServiceProviderHome = () => {
                 
                 <div className="bg-indigo-50 rounded-xl p-10">
                   <h3>
-                     {isLoading?0: <CountingAnimation targetNumber=  {data?.monthlyCompletedRequest}/>}
+                     {isLoading?0: <CountUp end=  {data?.monthlyCompletedRequest}/>}
                    
                     </h3>
                   <spnan>Completed Request</spnan>
@@ -73,7 +74,7 @@ const ServiceProviderHome = () => {
                 <div className="bg-indigo-50 rounded-xl p-10">
                   
                   <h3>
-                     {isLoading?0: <CountingAnimation targetNumber=  {data?.monthlyRevenue}/>}
+                     {isLoading?0: <CountUp end=  {data?.monthlyRevenue} duration={2}/>}
                     
                     </h3>
                   <spnan>Monthly Revenue</spnan>
@@ -87,14 +88,14 @@ const ServiceProviderHome = () => {
               <div className="flex justify-between space-x-4 text-center mt-6">
                 <div className="bg-indigo-50 rounded-xl p-10">
                   <h3>
-                     {isLoading?0: <CountingAnimation targetNumber= {data?.todayPendingRequest}/>}
+                     {isLoading?0: <CountUp end= {data?.todayPendingRequest}/>}
                    
                   </h3>
                   <spnan>Today's Pending Request</spnan>
                 </div>
                 <div className="bg-indigo-50 rounded-xl p-10">
                   <h3>
-                    {isLoading?0: <CountingAnimation targetNumber= {data?.todayCompletedRequest}/>}
+                    {isLoading?0: <CountUp end= {data?.todayCompletedRequest}/>}
                     
                     </h3>
                   <spnan>Today's Completed Request</spnan>

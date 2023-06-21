@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React  from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
-// import Navbar from "./components/Navbar/Navbar";
 import { Navbar } from "./components/Navbar/Navbar";
 import Homepage from "./pages/homepage/Homepage";
 import Orders from "./pages/orders/Orders";
@@ -9,7 +8,6 @@ import Services from "./pages/Services/Services";
 import Service from "./pages/Service/Service";
 import MyServices from "./pages/myServices/MyServices";
 import Add from "./pages/add/Add";
-import ProtectedRoute from "./components/ProtectedRoute/PrivateRoute";
 import ServiceProviderDashboard from './pages/DashBoard/ServiceProviderHome'
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
@@ -17,18 +15,16 @@ import Success from "./pages/success/Success";
 import Pay from "./pages/pay/Pay";
 import NotFound from "../src/pages/Errors/NotFound";
 import { useSelector } from "react-redux";
-import { CometChat } from "@cometchat-pro/chat";
 import MapPage from "./pages/Map/MapPage";
 import Dashboard from "./pages/DashBoard/Dashboard";
-import Video from "./pages/Conversasion/Video"
-import VideoChat from "./pages/Conversasion/VideoChat";
-import Room from "./pages/Conversasion/Room";
+
 const App = () => {
   const isLoogedIn = useSelector((state) => state.auth.isLoogedIn);
   const isServiceProvider = useSelector(
     (state) => state.auth.isServiceProvider
   );
   console.log("isLoogedIn from app", isLoogedIn);
+  console.log("is logjgi")
   return (
     <div>
       <Navbar />

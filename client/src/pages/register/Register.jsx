@@ -77,7 +77,7 @@ function Register({ setShowModal }) {
                   id="name"
                   name="name"
                   type="text"
-                  placeholder="Dixit Parmar"
+                  placeholder="jon doe"
                   onChange={handleChange}
                   required
                 />
@@ -164,7 +164,7 @@ function Register({ setShowModal }) {
                   id="phone"
                   name="phone"
                   type="text"
-                  placeholder="+9265469498"
+                  placeholder="+919265469498"
                   onChange={handleChange}
                   required
                 />

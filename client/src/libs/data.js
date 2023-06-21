@@ -155,3 +155,53 @@ export const gujaratCities = [
   { value: "Vadodara", text: "Vadodara" },
   { value: "Valsad", text: "Valsad" },
 ];
+
+
+export const columns = [
+  {
+    field: "image",
+    header: "Image",
+  },
+  {
+    field: "title",
+    header: "Title",
+  },
+  {
+    field: "price",
+    header: "Price",
+  },
+
+  {
+    field: "actions",
+    header: "Delete",
+  },
+];
+
+
+export const ordersColumns = [
+  {
+    field:"info",
+    header:"Info",
+  }
+  ,
+  {
+    field: "title",
+    header: "Title",
+  },
+  {
+    field: "price",
+    header: "Price",
+  },
+  // {
+  //   field:"Contact",
+  //   header: "Contact",
+  // },
+  {
+    field: "actions",
+    header: "Status",
+  },
+  {
+      field: "map",
+       header: "Map",
+     }
+];

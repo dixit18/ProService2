@@ -11,7 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Pagination from '../../utils/Pagination/Pagination';
 import { MdMail } from 'react-icons/md';
 import { AiFillEnvironment } from 'react-icons/ai';
-import { ordersColumns } from "../../data/data";
+import { ordersColumns } from "../../libs/data";
 
 const Orders = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -145,16 +145,16 @@ const Orders = () => {
         </Link>
       ),
       price: <p className="w-full flex items-center justify-start">{item.price}</p>,
-      Contact: (
-        <Link
-          to={`/video/${item.serviceId}`}
-          className={`w-8 h-8 cursor-pointer bg-indigo-600 rounded-full flex items-center justify-center text-white ${
-            !isStatusCompleted ? 'opacity-50 pointer-events-none' : ''
-          }`}
-        >
-          <MdMail size={18} />
-        </Link>
-      ),
+      // Contact: (
+      //   <Link
+      //     to={`/video/${item.serviceId}`}
+      //     className={`w-8 h-8 cursor-pointer bg-indigo-600 rounded-full flex items-center justify-center text-white ${
+      //       !isStatusCompleted ? 'opacity-50 pointer-events-none' : ''
+      //     }`}
+      //   >
+      //     <MdMail size={18} />
+      //   </Link>
+      // ),
       actions: <div>{actionButton}</div>,
       map: (
         <Link

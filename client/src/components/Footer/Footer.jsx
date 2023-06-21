@@ -6,12 +6,9 @@ import {
   BsInstagram,
   BsLinkedin,
   BsPinterest,
-  BsCurrencyDollar,
+
 } from "react-icons/bs";
-import { TbMan } from "react-icons/tb";
-import { TfiWorld } from "react-icons/tfi";
-import { Link } from "react-router-dom";
-import { footerLinks } from "../../data/data";
+
 
 const Footer = () => {
   const date = new Date();
@@ -47,14 +44,14 @@ const Footer = () => {
             <div className="flex items-center justify-start gap-4 flex-col md:flex-row">
               <div className="flex items-end justify-end select-none">
                 <h2 className="text-3xl select-none font-black tracking-tighter text-primary">
-                  ProSkill
+                  ProService
                 </h2>
                 <span className="border text-[6px] rounded-full w-3 h-3 flex items-center justify-center">
                   R
                 </span>
               </div>
               <p className="text-sm font-medium text-gray-400">
-                © ProSkill International Ltd. {year}
+                © ProService International Ltd. {year}
               </p>
             </div>
             <div className="flex items-center justify-end lg:gap-6 flex-col md:flex-row">

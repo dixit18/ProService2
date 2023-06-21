@@ -25,7 +25,7 @@ const FAQ = () => {
         </p>
         <a
           className="text-cyan-600 hover:underline dark:text-cyan-500"
-          href="https://flowbite.com/docs/getting-started/introduction/"
+         
         >
           <p>
             get started
@@ -54,7 +54,7 @@ const FAQ = () => {
         </p>
         <a
           className="text-cyan-600 hover:underline dark:text-cyan-500"
-          href="https://flowbite.com/figma/"
+         
         >
           <p>
             Figma design system
@@ -91,7 +91,7 @@ const FAQ = () => {
         <li>
           <a
             className="text-cyan-600 hover:underline dark:text-cyan-500"
-            href="https://flowbite.com/pro/"
+           
           >
             <p>
               ProService Pro
@@ -101,7 +101,7 @@ const FAQ = () => {
         <li>
           <a
             className="text-cyan-600 hover:underline dark:text-cyan-500"
-            href="https://tailwindui.com/"
+           
             rel="nofollow"
           >
             <p>
@@ -137,7 +137,7 @@ const FAQ = () => {
         <li>
           <a
             className="text-cyan-600 hover:underline dark:text-cyan-500"
-            href="https://flowbite.com/pro/"
+        
           >
             <p>
               Flowbite Pro
@@ -147,7 +147,7 @@ const FAQ = () => {
         <li>
           <a
             className="text-cyan-600 hover:underline dark:text-cyan-500"
-            href="https://tailwindui.com/"
+           
             rel="nofollow"
           >
             <p>
@@ -183,7 +183,7 @@ const FAQ = () => {
         <li>
           <a
             className="text-cyan-600 hover:underline dark:text-cyan-500"
-            href="https://flowbite.com/pro/"
+       
           >
             <p>
               Flowbite Pro
@@ -193,7 +193,7 @@ const FAQ = () => {
         <li>
           <a
             className="text-cyan-600 hover:underline dark:text-cyan-500"
-            href="https://tailwindui.com/"
+           
             rel="nofollow"
           >
             <p>

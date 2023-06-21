@@ -41,7 +41,7 @@ const Features = () => {
                 
                   <video
                     className="rounded-md h-full w-full"
-                    src="https://res.cloudinary.com/dvy5v1l8h/video/upload/v1685786533/pexels-matthias-groeneveld-14691541-3840x2160-24fps_yp7s69.mp4"
+                    src="https://res.cloudinary.com/dvy5v1l8h/video/upload/v1687365805/laptop_-_63_360p_ugd1wn.mp4"
                     controls muted autoPlay
                   ></video>
              
