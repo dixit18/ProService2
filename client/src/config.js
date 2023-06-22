@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 import axios from "axios";
-export   const Axios = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+export const Axios = axios.create({
+  baseURL: import.meta.env.VITE_BASEURL,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -8,4 +9,3 @@ export   const Axios = axios.create({
     credentials: "include",
   },
 });
- 

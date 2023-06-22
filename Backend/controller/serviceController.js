@@ -72,7 +72,7 @@ const getServices = catchAsync(async (req, res, next) => {
 
   if (!services) next(new ErrorHandler('No services found', 404));
 
-  console.log(services)
+  console.log(services,"services")
   res.status(200).json({
     services,
     pagination: {

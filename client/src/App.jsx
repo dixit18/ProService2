@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import { Navbar } from "./components/Navbar/Navbar";
@@ -8,7 +8,7 @@ import Services from "./pages/Services/Services";
 import Service from "./pages/Service/Service";
 import MyServices from "./pages/myServices/MyServices";
 import Add from "./pages/add/Add";
-import ServiceProviderDashboard from './pages/DashBoard/ServiceProviderHome'
+import ServiceProviderDashboard from "./pages/DashBoard/ServiceProviderHome";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Success from "./pages/success/Success";
@@ -24,26 +24,30 @@ const App = () => {
     (state) => state.auth.isServiceProvider
   );
   console.log("isLoogedIn from app", isLoogedIn);
-  console.log("is logjgi")
+  console.log("is logjgi");
   return (
     <div>
       <Navbar />
-      {console.log("hello", isLoogedIn)}
+      {console.log("hello", import.meta.env.VITE_BASEURL)}
       {isServiceProvider && <Dashboard />}
       <Routes>
-        {   isServiceProvider ? <Route path="/" element={<ServiceProviderDashboard/>}/>:<Route path="/" element={<Homepage />} />}
-        {isServiceProvider}
-       {!isServiceProvider &&  (<>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/single/:id" element={<Service />} />
-       </>
+        {isServiceProvider ? (
+          <Route path="/" element={<ServiceProviderDashboard />} />
+        ) : (
+          <Route path="/" element={<Homepage />} />
         )}
-       
+        {isServiceProvider}
+        {!isServiceProvider && (
+          <>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Register />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/services/single/:id" element={<Service />} />
+          </>
+        )}
+
         {/* <Route path="/video" element={<Video />} />
         <Route path="/video/:videoId" element={<Room/>}/> */}
-
 
         {isLoogedIn && <Route path="/bookings" element={<Orders />} />}
         {isLoogedIn && <Route path="/map/:id" element={<MapPage />} />}

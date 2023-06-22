@@ -10,7 +10,7 @@ const createReview = catchAsync(async (req, res, next)=>{
     const booking = await BookingModel.findOne({
         serviceId: req.body.serviceId,
         buyerId: req.user._id,
-        isCompleted: true,
+        status: { $in: ["completed"] },
       });
     
       if (!booking) {

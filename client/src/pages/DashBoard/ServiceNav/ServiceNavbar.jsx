@@ -32,10 +32,10 @@ const ServiceNavbar = () => {
                   <FiMessageSquare className="mr-2" />
                   Messages
                 </Link> */}
-                <Link to="/reviews" className="text-indigo-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                {/* <Link to="/reviews" className="text-indigo-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
                   <FiStar className="mr-2" />
                   Reviews
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

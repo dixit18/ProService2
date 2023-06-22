@@ -50,7 +50,7 @@ const ServiceProviderHome = () => {
               <img src="https://i.imgur.com/dJeEVcO.png" alt="" />
               <div className="text-center">
                 <h1 className="text-4xl font-bold text-gray-800">
-                        {isLoading?0: <CountUp end= {data?.totalRevenue[0]}/>}
+                        {isLoading?0: <CountUp end= {data?.totalRevenue[0]?.total}/>}
                  
                   </h1>
                 <span className="text-gray-500">Revenue</span>
