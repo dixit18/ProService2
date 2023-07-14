@@ -1,38 +1,45 @@
-const express = require('express')
+// Import required modules
+const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 
-const app  = express()
+// Create Express app
+const app = express();
 
+// Set up middleware
 const errorMiddleware = require('./middleware/error');
 
+// Configure CORS options
 const corsOptions = {
-    origin: "http://localhost:5173",
-    credentials: true, //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
-  };
+  origin: "http://localhost:5173",
+  credentials: true, // Access-Control-Allow-Credentials: true
+  optionSuccessStatus: 200,
+};
 
-app.use(cors(corsOptions));
-app.use(morgan("dev"))
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use('/public', express.static('public'));
+// Apply middleware to the app
+app.use(cors(corsOptions)); // Enable CORS with the specified options
+app.use(morgan("dev")); // Enable request logging in the console
+app.use(express.json()); // Parse JSON request bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bodies
+app.use(cookieParser()); // Parse cookie header
+app.use('/public', express.static('public')); // Serve static files from the 'public' directory
 
-const userRoute = require('./routes/userRoutes')
-const serviceRoute = require('./routes/servicesRoute')
-const bookingRoute = require('./routes/bookingRoute')
+// Import and register routes
+const userRoute = require('./routes/userRoutes');
+const serviceRoute = require('./routes/servicesRoute');
+const bookingRoute = require('./routes/bookingRoute');
 const reviewRoute = require('./routes/reviewRoute');
-const dashboardRoute = require('./routes/dashboardRoute')
+const dashboardRoute = require('./routes/dashboardRoute');
 
-app.use('/api/v1/user',userRoute)
-app.use('/api/v1/services',serviceRoute)
-app.use('/api/v1/bookings',bookingRoute)
-app.use('/api/v1/reviews',reviewRoute)
-app.use('/api/v1/dashboard',dashboardRoute)
+app.use('/api/v1/user', userRoute); // Register user routes under the '/api/v1/user' endpoint
+app.use('/api/v1/services', serviceRoute); // Register service routes under the '/api/v1/services' endpoint
+app.use('/api/v1/bookings', bookingRoute); // Register booking routes under the '/api/v1/bookings' endpoint
+app.use('/api/v1/reviews', reviewRoute); // Register review routes under the '/api/v1/reviews' endpoint
+app.use('/api/v1/dashboard', dashboardRoute); // Register dashboard routes under the '/api/v1/dashboard' endpoint
 
+// Error handling middleware
+app.use(errorMiddleware);
 
-app.use(errorMiddleware)
-
-module.exports =app;
+// Export the app
+module.exports = app;

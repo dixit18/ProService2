@@ -1,11 +1,12 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from "recharts";
+
 import { Axios } from "../../config";
 import requests from "../../libs/request";
 import { useQuery } from "@tanstack/react-query";
 import ChartComponent from './BarChart'
 import EChartComponent from './PieChart'
-import CountingAnimation from "../../components/CountingAnimation/CountingAnimation";
+
 import CountUp from 'react-countup';
 
 

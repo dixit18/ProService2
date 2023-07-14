@@ -114,9 +114,7 @@ export const featureData = [
       value: "Electricians",
       text: "Electricians",
     },
-    
-
-
+ 
   ];
 
 export const gujaratCities = [

@@ -9,7 +9,7 @@ import { Button } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Pagination from '../../utils/Pagination/Pagination';
-import { MdMail } from 'react-icons/md';
+
 import { AiFillEnvironment } from 'react-icons/ai';
 import { ordersColumns } from "../../libs/data";
 
@@ -24,6 +24,7 @@ const Orders = () => {
       Axios.get(`${requests.orders}?page=${currentPage}`).then((res) => res.data),
   });
 
+  console.log(data,"data")
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -56,6 +57,7 @@ const Orders = () => {
   }, [isClicked]);
 
   const tableActions = data?.data?.map((item) => {
+    console.log(item,"item")
     const isStatusCompleted = item.status === 'completed';
     const isRejected = item.status === 'rejected';
     const urlFormap = user.isServiceProvider ? item.buyerId._id : item.iserviceProviderId._id;

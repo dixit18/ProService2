@@ -23,20 +23,25 @@ const App = () => {
   const isServiceProvider = useSelector(
     (state) => state.auth.isServiceProvider
   );
+
   console.log("isLoogedIn from app", isLoogedIn);
-  console.log("is logjgi");
+
   return (
     <div>
       <Navbar />
-      {console.log("hello", import.meta.env.VITE_BASEURL)}
+    
+      {/* Render the dashboard component if the user is a service provider */}
       {isServiceProvider && <Dashboard />}
+
       <Routes>
+        {/* Use the ServiceProviderDashboard component if the user is a service provider */}
         {isServiceProvider ? (
           <Route path="/" element={<ServiceProviderDashboard />} />
         ) : (
           <Route path="/" element={<Homepage />} />
         )}
-        {isServiceProvider}
+
+        {/* Render the following routes only if the user is not a service provider */}
         {!isServiceProvider && (
           <>
             <Route path="/login" element={<Login />} />
@@ -46,20 +51,23 @@ const App = () => {
           </>
         )}
 
-        {/* <Route path="/video" element={<Video />} />
-        <Route path="/video/:videoId" element={<Room/>}/> */}
-
+        {/* Render the bookings and map routes if the user is logged in */}
         {isLoogedIn && <Route path="/bookings" element={<Orders />} />}
         {isLoogedIn && <Route path="/map/:id" element={<MapPage />} />}
-        {<Route path="/add" element={<Add />} />}
 
+        
+        <Route path="/add" element={<Add />} />
+
+        {/* Render the my services route if the user is logged in */}
         {isLoogedIn && <Route path="/myservices" element={<MyServices />} />}
 
+        {/* Render the pay and success routes if the user is logged in */}
         {isLoogedIn && <Route path="/pay/:id" element={<Pay />} />}
         {isLoogedIn && <Route path="/success" element={<Success />} />}
 
         <Route path="*" element={<NotFound />} />
       </Routes>
+
       <Footer />
     </div>
   );

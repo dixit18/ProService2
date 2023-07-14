@@ -5,9 +5,10 @@ import { useParams } from "react-router-dom";
 import { Axios } from "../../config";
 import requests from "../../libs/request";
 import CheckoutForm from "../../components/PayContents/CheckoutForm/CheckoutForm";
+const stripeKey = import.meta.env.VITE_STRIPEKEY
 
 const stripePromise = loadStripe(
-  "pk_test_51MtpnXSCeYZkwV5deC134dDTJqOjfzRjcO8W5kZEF4QmKX8vKd5qSAPSClaMdZYyhfBx817sut3voYm7TDwzXlv700OcS16Gpb"
+  stripeKey
 );
 
 const Pay = () => {

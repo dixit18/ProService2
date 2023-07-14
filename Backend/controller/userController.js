@@ -6,21 +6,18 @@ const sendEmail = require("../utils/sendMail");
 const crypto = require("crypto");
 const { default: mongoose } = require("mongoose");
 
-// /api/v1/user/signup
-//public
-//sign up
+// Signup a user
 const signupUser = catchAsync(async (req, res, next) => {
-
-  const { name, email, password, isServiceProvider, address, phone, avatar,city } =
+  const { name, email, password, isServiceProvider, address, phone, avatar, city } =
     req.body;
 
-    const existingUser = await User.findOne({ email });
-   
-    if (existingUser) {
-      return next(new ErrorHandler('User with this email already exists' , 400))
-    }
-  
+  // Check if user with the same email already exists
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return next(new ErrorHandler('User with this email already exists.', 400));
+  }
 
+  // Create a new user
   const newUser = await User.create({
     name,
     email,
@@ -30,55 +27,51 @@ const signupUser = catchAsync(async (req, res, next) => {
     phone,
     avatar,
     city,
-    
-   
   });
 
+  // Send registration email to the user
   await sendEmail({
     email: newUser.email,
-
     username: newUser.name,
     subject: "Register successfully",
     text: "Your account has been registered",
     html: `
-    <h1>Welcome to ProSkill</h1>
-    <p>Thank you for registering with MyApp. Here are your login credentials:</p>
-    <p>Username: ${newUser.name}</p>
-    
-    <p>Please keep this information secure and do not share it with anyone.</p>
-    <p>Thank you for using MyApp!</p>
-  `,
+      <h1>Welcome to ProSkill</h1>
+      <p>Thank you for registering with MyApp. Here are your login credentials:</p>
+      <p>Username: ${newUser.name}</p>
+      <p>Please keep this information secure and do not share it with anyone.</p>
+      <p>Thank you for using MyApp!</p>
+    `,
   });
-  //   createSendToken(newUser, 201, res)
+
+  // Send the user's information and set the authentication cookie
   sendCookie(newUser, 201, res);
 });
 
-// /api/v1/user/login
-//public
-//Login
-
+// Login a user
 const loginUser = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(email);
+
+  // Find the user by email
   const user = await User.findOne({ email }).select("+password");
-  console.log(user);
+
   if (!user) {
-    return next(new ErrorHandler("Use right credential", 401));
+    return next(new ErrorHandler("Use the right credentials.", 401));
   }
 
+  // Check if the provided password matches the user's password
   const isPasswordMatched = await user.comparePassword(password);
-
   if (!isPasswordMatched) {
-    return next(new ErrorHandler("Password doesn't match", 401));
+    return next(new ErrorHandler("Password doesn't match.", 401));
   }
+
+  // Set the authentication cookie
   sendCookie(user, 201, res);
-  
 });
 
-// /api/v1/user/logout
-//public
-//logout
+// Logout a user
 const logoutUser = catchAsync(async (req, res, next) => {
+  // Clear the authentication cookie
   res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
@@ -90,7 +83,9 @@ const logoutUser = catchAsync(async (req, res, next) => {
   });
 });
 
+// Get account details of a user
 const getAccountDetails = catchAsync(async (req, res, next) => {
+  // Find the user by ID
   const user = await User.findById(req.user._id);
 
   res.status(200).json({
@@ -99,11 +94,15 @@ const getAccountDetails = catchAsync(async (req, res, next) => {
   });
 });
 
+// Delete a user's profile
 const deleteProfile = catchAsync(async (req, res, next) => {
+  // Find the user by ID
   const user = await User.findById(req.user._id);
 
+  // Delete the user
   await user.deleteOne();
 
+  // Clear the authentication cookie
   res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
@@ -115,68 +114,77 @@ const deleteProfile = catchAsync(async (req, res, next) => {
   });
 });
 
+// Forgot password - Send reset password token
 const forgotPassword = catchAsync(async (req, res, next) => {
+  // Find the user by email
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
-    return next(new ErrorHandler("user not found", 404));
+    return next(new ErrorHandler("User not found", 404));
   }
-  const resetPasswordToken = await user.getResetPasswordToken();
 
+  // Generate and save reset password token for the user
+  const resetPasswordToken = await user.getResetPasswordToken();
   await user.save();
 
-  const resetURL = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/users/resetPassword/${resetPasswordToken}`;
+  const resetURL = `${req.protocol}://${req.get("host")}/api/v1/users/resetPassword/${resetPasswordToken}`;
 
+  // Send the reset password email to the user
   await sendEmail({
     email: user.email,
-
     username: user.name,
     subject: "Your reset Token",
     url: resetURL,
     html: `
       <h1>Welcome to ProSkill</h1>
       <p>Username: ${user.name}</p>
-      <p>here is your resetLink</p>
-      <a href=${resetURL}>here</a>
+      <p>Here is your reset link:</p>
+      <a href=${resetURL}>Reset Password</a>
       <p>Please keep this information secure and do not share it with anyone.</p>
       <p>Thank you for using MyApp!</p>
     `,
   });
+
   res.status(200).json({
     status: "success",
-    msg: "your reset token sent successfully",
+    msg: "Your reset token has been sent successfully",
   });
 });
 
+// Reset password using the reset password token
 const resetPassword = catchAsync(async (req, res, next) => {
   const resetPasswordToken = crypto
     .createHash("sha256")
     .update(req.params.token)
     .digest("hex");
 
+  // Find the user by the reset password token and check if the token is still valid
   const user = await User.findOne({
     resetPasswordToken,
     resetPasswordExpiry: { $gt: Date.now() },
   });
 
   if (!user) {
-    return next(new ErrorHandler("User Not Found", 404));
+    return next(new ErrorHandler("User not found", 404));
   }
 
+  // Reset the user's password and clear the reset password fields
   user.password = req.body.password;
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
 
   await user.save();
+
+  // Set the authentication cookie
   sendCookie(user, 200, res);
 });
 
+// Get a user by ID
 const getUser = async (req, res, next) => {
   const id = req.params.id;
-console.log(id)
+  console.log(id)
   const userId = new mongoose.Types.ObjectId(id);
   try {
+    // Find the user by ID
     const user = await User.findById(userId);
     console.log(user);
 
@@ -186,8 +194,7 @@ console.log(id)
     res.status(400).json({ message: err.message });
   }
 };
-//bs hve chat baki che
-// map kai rite  implement karyo google map
+
 module.exports = {
   signupUser,
   loginUser,

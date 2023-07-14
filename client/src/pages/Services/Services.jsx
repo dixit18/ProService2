@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-unused-vars */
 import React, { useRef, useState, useEffect } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { useQuery } from "@tanstack/react-query";
@@ -10,9 +12,10 @@ import Pagination from "../../utils/Pagination/Pagination";
 import { gujaratCities } from "../../libs/data";
 import { useSelector } from "react-redux";
 
+
 const Services = () => {
   const user = useSelector(state=>state.auth)
-  console.log(user,"user from services")
+ 
   const { search } = useLocation();
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("sales");
@@ -21,10 +24,6 @@ const Services = () => {
   const cityRef = useRef();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCity, setSelectedCity] = useState(user.isLoggedIn ? user.city : "");
-  const reSort = (types) => {
-    setSort(types);
-    setOpen(false);
-  };
 
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["services", currentPage],
@@ -49,12 +48,15 @@ const Services = () => {
       return Axios.get(url).then((res) => res.data);
 
     },
+  
   });
 
   useEffect(() => {
     refetch();
+  
   }, [sort, currentPage]);
 
+ 
   const apply = () => {
     setCurrentPage(1);
     refetch();

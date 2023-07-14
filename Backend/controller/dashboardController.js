@@ -5,7 +5,7 @@ const ServiceModel = require("../models/serviceModel");
 const ReviewModel = require("../models/reviewModel");
 
 const getServiceProviderDashboard = async (req, res) => {
-  const serviceProviderId = req.user._id; // Assuming you have authentication middleware to get the current user's ID
+  const serviceProviderId = req.user._id;
 console.log("inside dashboarad")
   try {
     // Total Booking of Service Provider
@@ -144,7 +144,7 @@ console.log("inside dashboarad")
       chartData,
       chartDataForPie
     };
-console.log(dashboardData,"hkjejijoie")
+
     res.json(dashboardData);
   } catch (error) {
     console.error(error);
